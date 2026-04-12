@@ -1,0 +1,101 @@
+Sintoma 1,Sintoma 2,Doenca Associada
+dor no peito,aperto no torax,Infarto Agudo do Miocardio
+cansaco constante,fadiga,Insuficiencia Cardiaca
+falta de ar,dificuldade para respirar,Angina
+febre alta,dor no corpo,Gripe
+tosse seca,perda de olfato,COVID-19
+dor de cabeca intensa,sensibilidade a luz,Enxaqueca
+dor abdominal,nausea,Gastrite
+ardor ao urinar,vontade frequente de urinar,Infeccao Urinaria
+tristeza persistente,perda de interesse,Depressao
+sede excessiva,urinar frequentemente,Diabetes
+rigidez muscular,tremores,Doenca de Parkinson
+perda de memoria recente,confusao mental,Alzheimer
+inchaco nas pernas,cansaco ao esforco,Insuficiencia Cardiaca
+dor nas articulacoes,inchaco articular,Artrite
+coceira na pele,manchas avermelhadas,Dermatite
+dor de garganta,dificuldade para engolir,Amigdalite
+chiado no peito,falta de ar,Asma
+pressao alta,dor de cabeca,Hipertensao
+palpitacoes,tontura,Arritmia
+dor lombar,dificuldade para se movimentar,Hernia de Disco
+dor no peito irradiando para o braco esquerdo,suor excessivo,Infarto Agudo do Miocardio
+febre baixa persistente,tosse com catarro,Pneumonia
+falta de ar ao deitar,inchaco nos pes,Insuficiencia Cardiaca
+dor de estomago apos comer,azia frequente,Refluxo Gastroesofagico
+diarreia intensa,dor abdominal aguda,Gastroenterite
+manchas brancas na garganta,febre alta,Amigdalite
+nariz entupido,espirros frequentes,Rinite Alergica
+coceira intensa a noite,lesoes na pele,Sarna
+queda de cabelo excessiva,cansaco constante,Anemia
+visao embacada,dor nos olhos,Glaucoma
+tremores nas maos,dificuldade de equilibrio,Doenca de Parkinson
+rigidez no pescoco,febre alta,Meningite
+perda de peso sem motivo,suor noturno,Tuberculose
+dor no peito ao respirar fundo,tosse seca,Pleurite
+formigamento nas maos,fraqueza muscular,Esclerose Multipla
+sede constante,visao turva,Diabetes
+tristeza profunda,insonia frequente,Depressao
+preocupacao excessiva,taquicardia,Transtorno de Ansiedade
+dor ao evacuar,sangramento anal,Hemorroida
+dor pelvica,atraso menstrual,Endometriose
+dor no ombro ao movimentar,dificuldade para levantar o braco,Tendinite
+dor intensa no lado direito do abdomen,nausea,Apendicite
+febre alta repentina,dor atras dos olhos,Dengue
+coceira vaginal,ardor ao urinar,Candidiase
+tosse persistente por semanas,cansaco extremo,Bronquite
+perda de memoria progressiva,dificuldade para reconhecer pessoas,Alzheimer
+dor no joelho ao caminhar,inchaco no joelho,Artrose
+olhos amarelados,urina escura,Hepatite
+vomitos frequentes,dor abdominal forte,Intoxicacao Alimentar
+pressao no peito ao esforco,falta de ar,Angina
+inchaco no rosto,dificuldade para respirar,Reacao Alergica Grave
+dor ao respirar,chiado no peito,Asma
+cansaco ao subir escadas,palpitacoes,Insuficiencia Cardiaca
+febre intermitente,calafrios,Malaria
+manchas vermelhas pelo corpo,dor nas articulacoes,Zika
+dor muscular intensa,urina escura,Lesao Muscular Grave
+fraqueza subita em um lado do corpo,dificuldade para falar,AVC
+dor no ouvido,perda parcial da audicao,Otite
+visao dupla,dor de cabeca intensa,Aneurisma
+dor na regiao lombar ao levantar peso,espasmos musculares,Lombalgia
+dor de cabeca leve,cansaco apos um dia longo,Estresse
+espirros frequentes,nariz escorrendo,Resfriado Comum
+febre baixa,dor de garganta,Resfriado Comum
+tosse leve,coriza,Resfriado Comum
+dor muscular apos esforco,rigidez leve,Distensao Muscular
+ma digestao,azia frequente,Indigestao
+dor abdominal leve,excesso de gases,Gases Intestinais
+constipacao,dor ao evacuar,Prisao de Ventre
+diarreia leve,dor abdominal leve,Intoxicacao Alimentar Leve
+dor de garganta leve,rouquidao,Laringite
+olhos vermelhos,coceira nos olhos,Conjuntivite
+febre baixa,dor no corpo,Gripe
+nariz entupido,dor facial leve,Sinusite
+cansaco excessivo,dor no corpo,Virose
+dor nas costas apos ma postura,rigidez lombar,Dor Postural
+dor no pescoco,rigidez ao movimentar,Torcicolo
+coceira na pele apos contato com produto novo,Alergia Cutanea
+ardor no estomago apos cafe excessivo,Gastrite Leve
+nausea leve,mal-estar geral,Virose
+dor leve no ouvido,sensacao de ouvido tampado,Otite Leve
+tontura ao levantar rapidamente,visao escurecida,Pressao Baixa
+palidez,cansaco frequente,Anemia
+inchaco leve nos tornozelos,desconforto ao final do dia,Retencao de Liquido
+dor de cabeca ao final do dia,tensao no pescoco,Cefaleia Tensional
+irritacao nos olhos apos exposicao ao vento,Olho Seco
+tosse seca a noite,irritacao na garganta,Alergia Respiratoria
+pequenas aftas na boca,dor ao comer,Estomatite
+queda leve de pressao,suor frio,Mal-estar Passageiro
+pele ressecada,coceira leve,Dermatite Leve
+dor leve no joelho apos exercicio,desconforto ao dobrar,Tendinite Leve
+dor no peito ao tossir,tosse com sangue,Embolia Pulmonar
+dor abdominal superior irradiando para as costas,nausea intensa,Pancreatite
+tremores intensos,sudorese excessiva,Hipoglicemia
+dor no calcanhar ao acordar,dificuldade para pisar,Fascite Plantar
+inchaco doloroso na panturrilha,vermelhidao local,Trombose Venosa Profunda
+dor ao mastigar,estalos na mandibula,Disfuncao da ATM
+sono excessivo durante o dia,ronco alto noturno,Apneia do Sono
+dor toracica em queimação apos refeicao,gosto amargo na boca,Refluxo Gastroesofagico
+dor intensa na lateral do abdomen inferior direito,febre leve,Diverticulite
+cansaco extremo apos infeccao recente,dificuldade de concentracao,Sindrome da Fadiga Cronica
