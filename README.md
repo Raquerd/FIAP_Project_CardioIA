@@ -15,6 +15,16 @@ Caique Nonato da Silva Bezerra
 
 ---  
 
+# Organização do projeto
+
+* **config:** Centraliza arquivos de configuração, como mapeamentos de sintomas em .csv, dicionários de regras e scripts de suporte utilizados por outras partes do sistema.
+* **docs:** Reservada para a base de conhecimento textual e documentação técnica, incluindo os artigos acadêmicos do DATASUS e SciELO que fundamentam o projeto.
+* **scripts:** Contém os notebooks (.ipynb) e arquivos Python (.py) desenvolvidos em cada fase, como os classificadores de Machine Learning e algoritmos de extração.
+* **temp:** Diretório destinado a arquivos gerados durante a execução, logs de processamento e datasets de teste temporários.
+* **assets:** Armazena os ativos fundamentais do projeto, como o conjunto de 100 imagens de ECG e as bases de dados principais que alimentam os modelos de IA.
+
+---  
+
 # 🏥 CardioIA – A Era da Cardiologia Inteligente
 
 ## 📖 Proposta de Projeto:
