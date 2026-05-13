@@ -60,7 +60,6 @@ Markdown
 
 Nesta etapa, o **CardioIA** avançou para o desenvolvimento de motores de decisão, transformando os dados brutos coletados na Fase 1 em diagnósticos assistidos por modelos de Machine Learning.
 
----
 ### Desenvolvimento das partes
 * **Fontes de dados:**
     * Mapa de doenças: A listagem dos sintomas e doenças ficou por parte da Lais Kurahashi
@@ -86,3 +85,51 @@ Implementamos um classificador estatístico focado na priorização de atendimen
 ### 📹 Demonstração e Avaliação
 * **Análise de Performance:** O modelo demonstrou eficácia na detecção de padrões de risco, embora a acurácia reflita a necessidade de bases de dados maiores para lidar com a subjetividade dos relatos humanos.
 * **Vídeo de Demonstração:** [[Link Youtube Capitulo 2 CARDIO IA](https://youtu.be/xBCWgkPsdxc)]
+
+---
+
+## 🚀 Fase 3: Monitoramento em Tempo Real e Resiliência IoT
+
+### Desenvolvimento das partes
+* **Fontes de dados:**
+    * ESP32: Lais Kurahashi
+    * Conexão MQTT e configurações: Lucas Martinelli
+    * Git Hub: Davi Ferreira
+    * NODE-RED: Davi Ferreira
+
+Nesta fase do projeto **CardioIA**, implementamos a integração completa entre a camada Edge e a nuvem (Cloud/Fog), garantindo que o monitoramento do paciente seja contínuo, mesmo em situações de falha de conectividade.
+
+Observação: Os processos de sensores feitos nessa fase, foram relaizados com base em uma simulação do ESP32 na Wokwi
+
+### 🛠️ O que foi implementado:
+1. **Edge Computing (ESP32):**
+   - Programação em C++ para leitura de Sensores de Temperatura (DHT22) e Frequência Cardíaca (Simulada via Potenciômetro).
+   - **Lógica de Resiliência:** Implementação de um buffer local que armazena os sinais vitais caso o Wi-Fi caia, sincronizando-os automaticamente ao recuperar a conexão.
+   - **Alerta Local:** Acionamento de LED físico para triagem imediata de anomalias (BPM > 120 ou Temp > 38°C).
+
+2. **Cloud & Conectividade (MQTT):**
+   - Configuração do protocolo MQTT via Broker HiveMQ para transmissão de dados em formato JSON.
+   - Comunicação assíncrona entre o simulador Wokwi e o servidor local.
+
+3. **Interface e Inteligência (Node-RED):**
+   - Criação de um Dashboard interativo com gráficos de tendência e medidores instantâneos.
+   - **Motor de Regras:** Nós de desvio condicional que disparam notificações visuais no painel ao detectar estados críticos de saúde.
+
+### 📂 Estrutura de Arquivos desta Fase
+
+Os arquivos referentes a esta etapa estão organizados nos seguintes diretórios:
+
+* **Documentação:**
+    * [`Relatorio_ESP32.pdf`](./docs/Relatorio_ESP32.pdf) - Detalhamento da arquitetura de borda e resiliência.
+    * [`Relatorio_Node-RED.pdf`](./docs/Relatorio_Node-RED.pdf) - Explicação da camada de nuvem, MQTT e lógica de alertas.
+* **Scripts e Configurações:**
+    * [`skecth_esp32.ino`](./scripts/skecth_esp32.ino) - Código fonte C++ do microcontrolador.
+    * [`ESP32_diagram.json`](./config/ESP32_diagram.json) - Diagrama de conexões do simulador.
+* **Assets:**
+    * Imagens e prints do funcionamento do Dashboard estão na pasta [`/assets`](./assets).
+
+### 🌐 Simulação Online (Wokwi)
+
+O protótipo funcional pode ser testado diretamente no navegador através do link abaixo:
+
+🔗 **[Projeto CardioIA no Wokwi](https://wokwi.com/projects/463793755500080129)**
