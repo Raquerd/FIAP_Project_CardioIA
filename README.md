@@ -143,9 +143,25 @@ O protótipo funcional pode ser testado diretamente no navegador através do lin
 Nesta fase, expandimos o motor de diagnósticos lógicos do CardioIA para classificar imagens de Eletrocardiograma (ECG), diferenciando exames normais (Classe N) de anomalias (Classe M).
 
 ### Desenvolvimento e Modelagem
-Desenvolvemos e avaliamos duas abordagens de Redes Neurais Convolucionais usando o framework **PyTorch**:
-1.  **CNN do Zero (Scratch CNN):** Uma arquitetura customizada contendo 3 camadas convolucionais (`Conv2D` + `ReLU` + `MaxPooling2D`), seguidas de camadas densas com `Dropout` para regularização.
-2.  **Transfer Learning (ResNet50):** Carregamos o modelo consagrado ResNet50 pré-treinado com pesos do ImageNet, congelamos suas camadas de extração de features iniciais e adaptamos sua camada linear de saída (`fc`) para classificar as 2 classes sob nosso contexto médico.
+Desenvolvemos e avaliamos duas abordagens de Redes Neurais Convolucionais usando o framework **PyTorch** para processar exames de ECG redimensionados para `224x224` pixels:
+
+#### 1. CNN do Zero (Scratch CNN)
+Trata-se de uma rede neural convolucional profunda e otimizada, desenvolvida do absoluto zero:
+*   **Camada de Entrada:** Imagem em escala RGB de dimensões `3 x 224 x 224`.
+*   **Extrator de Features (Blocos Convolucionais):**
+    *   **Bloco 1:** `Conv2D(3 -> 16 canais, kernel=3, padding=1)` + `ReLU` + `MaxPool2d(kernel=2, stride=2)` $\rightarrow$ Reduz a dimensão para `16 x 112 x 112`.
+    *   **Bloco 2:** `Conv2D(16 -> 32 canais, kernel=3, padding=1)` + `ReLU` + `MaxPool2d(kernel=2, stride=2)` $\rightarrow$ Reduz a dimensão para `32 x 56 x 56`.
+    *   **Bloco 3:** `Conv2D(32 -> 64 canais, kernel=3, padding=1)` + `ReLU` + `MaxPool2d(kernel=2, stride=2)` $\rightarrow$ Reduz a dimensão para `64 x 28 x 28`.
+*   **Camada Classificadora (Fully Connected):**
+    *   `Flatten` para vetorizar as saídas das convoluções em um array unidimensional de `50.176` neurônios.
+    *   `Linear(50176 -> 128 neurônios)` + `ReLU` + `Dropout(p=0.5)` para prevenir o sobreajuste (overfitting).
+    *   `Linear(128 -> 2 neurônios de saída)` mapeando para as classes finalistas (Normal e Anomalia).
+
+#### 2. Transfer Learning (ResNet50)
+Um modelo avançado baseado em aprendizado por transferência de conhecimento:
+*   **Base:** Arquitetura `ResNet50` carregada com pesos pré-treinados da base ImageNet.
+*   **Congelamento (Freezing):** Todos os pesos originais do extrator de features da ResNet50 foram congelados (`requires_grad = False`). Isso nos permite reaproveitar filtros visuais robustos de bordas e texturas já consolidados.
+*   **Cabeça de Classificação:** A camada de saída original (`fc`) foi substituída por uma nova camada linear adaptada para nosso cenário: `nn.Linear(2048 -> 2 neurônios de saída)`. Apenas esta camada foi deixada livre para o aprendizado dos gradientes.
 
 ### Resultados e Métricas de Teste
 Os modelos foram validados no conjunto de teste independente contendo 115 exames de ECG e alcançaram classificação perfeita:
