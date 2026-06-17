@@ -17,11 +17,13 @@ Caique Nonato da Silva Bezerra
 
 # Organização do projeto
 
-* **config:** Centraliza arquivos de configuração, como mapeamentos de sintomas em .csv, dicionários de regras e scripts de suporte utilizados por outras partes do sistema.
-* **docs:** Reservada para a base de conhecimento textual e documentação técnica, incluindo os artigos acadêmicos do DATASUS e SciELO que fundamentam o projeto.
-* **scripts:** Contém os notebooks (.ipynb) e arquivos Python (.py) desenvolvidos em cada fase, como os classificadores de Machine Learning e algoritmos de extração.
-* **temp:** Diretório destinado a arquivos gerados durante a execução, logs de processamento e datasets de teste temporários.
-* **assets:** Armazena os ativos fundamentais do projeto, como o conjunto de 100 imagens de ECG e as bases de dados principais que alimentam os modelos de IA.
+* **config:** Centraliza arquivos de configuração, mapeamento de sintomas (.csv), dicionários de regras, diagramas e os pesos dos modelos CNN salvos (`.pth`).
+* **docs:** Reservada para a base de conhecimento textual e documentação técnica, incluindo relatórios em PDF do ESP32 e Node-RED.
+* **scripts:** Contém os notebooks (.ipynb) de análise e treinamento, o script principal de treinamento de deep learning (`cardioia_treinamento_cnn.py`), o protótipo Streamlit (`cardioia_prototype.py`) e o código fonte em C++ do ESP32 (`skecth_esp32.ino`).
+* **temp:** Diretório destinado a arquivos gerados durante a execução, logs de processamento e tabelas de testes temporárias.
+* **assets:** Armazena os ativos fundamentais do projeto, como a base de dados cardiologia (`heart.csv`), o conjunto completo de imagens de ECG originais e o conjunto final de dados tratados e divididos de forma estratificada para as redes neurais (`dataset_final`).
+* **requirements.txt:** Arquivo com a listagem de todas as bibliotecas Python necessárias para executar o treinamento e o protótipo.
+* **main.bat:** Script inicializador automatizado para Windows que instala as dependências do `requirements.txt` e inicia o protótipo Streamlit.
 
 ---  
 
@@ -133,3 +135,46 @@ Os arquivos referentes a esta etapa estão organizados nos seguintes diretórios
 O protótipo funcional pode ser testado diretamente no navegador através do link abaixo:
 
 🔗 **[Projeto CardioIA no Wokwi](https://wokwi.com/projects/463793755500080129)**
+
+---
+
+## 🧠 Fase 4: Inteligência e Visão Computacional (CNNs)
+
+Nesta fase, expandimos o motor de diagnósticos lógicos do CardioIA para classificar imagens de Eletrocardiograma (ECG), diferenciando exames normais (Classe N) de anomalias (Classe M).
+
+### Desenvolvimento e Modelagem
+Desenvolvemos e avaliamos duas abordagens de Redes Neurais Convolucionais usando o framework **PyTorch**:
+1.  **CNN do Zero (Scratch CNN):** Uma arquitetura customizada contendo 3 camadas convolucionais (`Conv2D` + `ReLU` + `MaxPooling2D`), seguidas de camadas densas com `Dropout` para regularização.
+2.  **Transfer Learning (ResNet50):** Carregamos o modelo consagrado ResNet50 pré-treinado com pesos do ImageNet, congelamos suas camadas de extração de features iniciais e adaptamos sua camada linear de saída (`fc`) para classificar as 2 classes sob nosso contexto médico.
+
+### Resultados e Métricas de Teste
+Os modelos foram validados no conjunto de teste independente contendo 115 exames de ECG e alcançaram classificação perfeita:
+
+| Métrica | CNN do Zero | ResNet50 Transfer Learning |
+| :--- | :---: | :---: |
+| **Acurácia** | 1.0000 | 1.0000 |
+| **Precisão** | 1.0000 | 1.0000 |
+| **Recall (Sensibilidade)** | 1.0000 | 1.0000 |
+| **F1-Score** | 1.0000 | 1.0000 |
+
+*As matrizes de confusão e o gráfico do histórico de perdas/acurácia estão salvos na pasta `/assets`.*
+
+### Protótipo de Apresentação Interativa (Streamlit)
+
+Criamos uma aplicação web local de demonstração em poucas linhas de código usando o framework **Streamlit** para fins de homologação e apresentação do sistema hospitalar:
+*   **Seletor de Modelos:** Permite alternar dinamicamente na barra lateral do painel entre os pesos do modelo *CNN do Zero* (`~25MB`) e do *ResNet50 Transfer Learning* (`~94MB`).
+*   **Seleção de Imagens de Teste:** Varre o diretório de testes e exibe os exames disponíveis para a escolha do médico/usuário.
+*   **Visualização e Inferência:** Exibe o exame selecionado na tela e, ao clicar em **"Analisar Exame"**, exibe o laudo estilizado contendo a predição da IA (**Padrão Identificado: Normal** em verde ou **Padrão Identificado: Anomalia Detectada** em vermelho) acompanhado do percentual exato de certeza.
+
+### Como Executar o Aplicativo
+1.  **Inicialização Rápida (Recomendado):**
+    Execute o arquivo `main.bat` na raiz do projeto. Ele se encarregará de ler o `requirements.txt`, instalar todas as bibliotecas necessárias automaticamente e iniciar a interface Streamlit.
+    ```powershell
+    .\main.bat
+    ```
+2.  **Execução Manual:**
+    ```powershell
+    pip install -r requirements.txt
+    streamlit run scripts/cardioia_prototype.py
+    ```
+    O aplicativo abrirá no seu navegador padrão em `http://localhost:8501`.
