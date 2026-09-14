@@ -5,3 +5,7 @@ pandas
 matplotlib
 torch
 torchvision
+flask
+flask-cors
+python-dotenv
+requests

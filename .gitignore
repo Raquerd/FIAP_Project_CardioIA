@@ -1,0 +1,16 @@
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Variaveis de ambiente sensiveis
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.class
+
+# Arquivos temporarios
+temp/
+*.log

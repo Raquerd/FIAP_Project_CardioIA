@@ -1,0 +1,1831 @@
+{
+  "intents": [
+    {
+      "intent": "agendamento",
+      "examples": [
+        {
+          "text": "Como faço para agendar?"
+        },
+        {
+          "text": "Gostaria de marcar um exame"
+        },
+        {
+          "text": "Preciso agendar meu exame"
+        },
+        {
+          "text": "preciso de ajuda"
+        },
+        {
+          "text": "quero agendar um eletrocardiograma"
+        },
+        {
+          "text": "Quero agendar um exame"
+        },
+        {
+          "text": "Quero fazer um agendamento"
+        },
+        {
+          "text": "Quero marcar um horário"
+        },
+        {
+          "text": "Tem horário disponível?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "consultar_resultado",
+      "examples": [
+        {
+          "text": "Como faço para consultar o resultado?"
+        },
+        {
+          "text": "Meu exame já está disponível?"
+        },
+        {
+          "text": "Meu resultado já saiu?"
+        },
+        {
+          "text": "Onde vejo o resultado do exame?"
+        },
+        {
+          "text": "Quero consultar meu exame"
+        },
+        {
+          "text": "Quero ver meu resultado"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "despedida",
+      "examples": [
+        {
+          "text": "até mais"
+        },
+        {
+          "text": "era só isso"
+        },
+        {
+          "text": "oberigado pela ajuda"
+        },
+        {
+          "text": "obrigada"
+        },
+        {
+          "text": "obrigada pela ajuda"
+        },
+        {
+          "text": "obrigado"
+        },
+        {
+          "text": "pode encerrar"
+        },
+        {
+          "text": "tchau"
+        },
+        {
+          "text": "termo"
+        },
+        {
+          "text": "valeu"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "entender_resultado",
+      "examples": [
+        {
+          "text": "Esse resultado está normal?"
+        },
+        {
+          "text": "Meu exame deu alterado, o que significa?"
+        },
+        {
+          "text": "Não entendi o resultado"
+        },
+        {
+          "text": "O que quer dizer esse resultado?"
+        },
+        {
+          "text": "Pode me ajudar a entender meu resultado?"
+        },
+        {
+          "text": "termo"
+        },
+        {
+          "text": "valor"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "falar_com_atendente",
+      "examples": [
+        {
+          "text": "Pode me transferir para um atendente?"
+        },
+        {
+          "text": "Preciso de atendimento humano"
+        },
+        {
+          "text": "Preciso falar com uma pessoa"
+        },
+        {
+          "text": "Quero falar com um atendente"
+        },
+        {
+          "text": "Quero ser atendido por uma pessoa"
+        },
+        {
+          "text": "v"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "informar_frequencia",
+      "examples": [
+        {
+          "text": "Meu coração está a 120 por minuto"
+        },
+        {
+          "text": "Meu relógio marcou 110 bpm"
+        },
+        {
+          "text": "Meus batimentos deram 95"
+        },
+        {
+          "text": "Minha frequência está em 110"
+        },
+        {
+          "text": "Minha frequência está em 120"
+        },
+        {
+          "text": "Minha frequência está em 95"
+        },
+        {
+          "text": "Quero informar minha frequência cardíaca"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "informar_pressao",
+      "examples": [
+        {
+          "text": "Medi minha pressão agora"
+        },
+        {
+          "text": "Minha pressão caiu"
+        },
+        {
+          "text": "Minha pressão deu 12 por 8"
+        },
+        {
+          "text": "Minha pressão deu 150 por 90"
+        },
+        {
+          "text": "Minha pressão deu 160 por 100"
+        },
+        {
+          "text": "Minha pressão deu alterada"
+        },
+        {
+          "text": "Minha pressão está 14 por 9"
+        },
+        {
+          "text": "Minha pressão está alta"
+        },
+        {
+          "text": "Minha pressão está baixa"
+        },
+        {
+          "text": "Minha pressão subiu"
+        },
+        {
+          "text": "Quero informar minha pressão"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "pedir_orientacao",
+      "examples": [
+        {
+          "text": "Devo ir ao pronto atendimento?"
+        },
+        {
+          "text": "Isso é preocupante?"
+        },
+        {
+          "text": "O que eu devo fazer?"
+        },
+        {
+          "text": "O que faço agora?"
+        },
+        {
+          "text": "O que você recomenda?"
+        },
+        {
+          "text": "Preciso buscar atendimento?"
+        },
+        {
+          "text": "Preciso procurar um médico?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "prazo_entrega",
+      "examples": [
+        {
+          "text": "Em quanto tempo sai o resultado"
+        },
+        {
+          "text": "O resultado demora quantos dias"
+        },
+        {
+          "text": "Qual é o prazo de entrega"
+        },
+        {
+          "text": "Qual o prazo para liberar o exame"
+        },
+        {
+          "text": "Quando meu resultado fica pronto"
+        },
+        {
+          "text": "Quando o laudo será liberado"
+        },
+        {
+          "text": "Quando posso ver meu resultado"
+        },
+        {
+          "text": "Quanto tempo demora para ficar pronto"
+        },
+        {
+          "text": "Quanto tempo preciso esperar"
+        },
+        {
+          "text": "Tem previsão para ficar pronto"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "preparo_exame",
+      "examples": [
+        {
+          "text": "Como funciona o preparo?"
+        },
+        {
+          "text": "eco"
+        },
+        {
+          "text": "Posso comer antes do exame?"
+        },
+        {
+          "text": "Posso tomar água antes do exame?"
+        },
+        {
+          "text": "Preciso chegar com antecedência?"
+        },
+        {
+          "text": "Preciso fazer jejum para o exame?"
+        },
+        {
+          "text": "Preciso levar alguma coisa no dia do exame?"
+        },
+        {
+          "text": "Preciso suspender algum medicamento?"
+        },
+        {
+          "text": "Quanto tempo de jejum preciso fazer?"
+        },
+        {
+          "text": "Tem alguma restrição antes do exame?"
+        },
+        {
+          "text": "Tem algum preparo antes do exame?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "relatar_sintoma",
+      "examples": [
+        {
+          "text": "Estou com cansaço"
+        },
+        {
+          "text": "Estou com um mal-estar"
+        },
+        {
+          "text": "Estou indisposto"
+        },
+        {
+          "text": "estou mal"
+        },
+        {
+          "text": "Estou meio mal hoje"
+        },
+        {
+          "text": "estou me sentindo mal"
+        },
+        {
+          "text": "Estou passando mal"
+        },
+        {
+          "text": "meu coracao esta acelerado"
+        },
+        {
+          "text": "nao estou bem"
+        },
+        {
+          "text": "Não estou bem"
+        },
+        {
+          "text": "nao estou me sentindo bem"
+        },
+        {
+          "text": "Não estou me sentindo bem"
+        },
+        {
+          "text": "Não estou me sentindo muito bem"
+        },
+        {
+          "text": "palpitacao"
+        },
+        {
+          "text": "palpitação"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "saudação",
+      "examples": [
+        {
+          "text": "boa noite"
+        },
+        {
+          "text": "boa tarde"
+        },
+        {
+          "text": "bom dia"
+        },
+        {
+          "text": "e ai"
+        },
+        {
+          "text": "eai"
+        },
+        {
+          "text": "gostaria de tirar uma duvida"
+        },
+        {
+          "text": "oi"
+        },
+        {
+          "text": "oi cardioIA"
+        },
+        {
+          "text": "oie"
+        },
+        {
+          "text": "oii"
+        },
+        {
+          "text": "oiii"
+        },
+        {
+          "text": "oi, preciso de ajuda"
+        },
+        {
+          "text": "oi, tudo bem"
+        },
+        {
+          "text": "ola"
+        },
+        {
+          "text": "ola, pode me ajudar"
+        },
+        {
+          "text": "ola, tudo bem"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "duvida_resultado",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "alteração",
+          "synonyms": [
+            "alteracao",
+            "alterado",
+            "alto",
+            "baixo",
+            "fora do normal"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "termo",
+          "synonyms": [
+            "expressao",
+            "expressão",
+            "nome",
+            "palavra"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "valor",
+          "synonyms": [
+            "nivel",
+            "nível",
+            "numero",
+            "número",
+            "taxa",
+            "valor"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sintomas",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "cansaco",
+          "synonyms": [
+            "cansaço ",
+            "exaustão",
+            "fadiga",
+            "falta de energia"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "desmaio",
+          "synonyms": [
+            "apaguei",
+            "desmaiei",
+            "desmaio",
+            "perdi a consciência",
+            "quase desmaiei",
+            "sensação de desmaio"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "dor_peito",
+          "synonyms": [
+            "aperto no peito",
+            "dor no peito",
+            "dor no tórax",
+            "peito doendo",
+            "peito dói",
+            "pressão no peito"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "falta_de_ar",
+          "synonyms": [
+            "dificuldade de respirar",
+            "dificuldade para respirar",
+            "falta de ar",
+            "não consigo respirar",
+            "sem ar"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "fraqueza",
+          "synonyms": [
+            "corpo fraco",
+            "fraco",
+            "fraqueza",
+            "moleza"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "nausea",
+          "synonyms": [
+            "enjoo",
+            "estômago embrulhado",
+            "estou enjoado",
+            "náusea",
+            "vontade de vomitar"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "palpitacao",
+          "synonyms": [
+            "batimento acelerado",
+            "batimentos acelerados",
+            "coração acelerado",
+            "coração batendo forte",
+            "coração disparado",
+            "meu coração está acelerado",
+            "meu coração está disparado",
+            "palpitação "
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "suor_frio",
+          "synonyms": [
+            "suando frio ",
+            "suor frio"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "tontura",
+          "synonyms": [
+            "cabeça girando",
+            "sensação de desmaio",
+            "tonto",
+            "tontura",
+            "vertigem"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-date",
+      "values": []
+    },
+    {
+      "entity": "sys-time",
+      "values": []
+    },
+    {
+      "entity": "tipo_exame",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "ecocardiograma",
+          "synonyms": [
+            "eco"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "eletrocardiograma",
+          "synonyms": [
+            "eletro"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "exame sangue",
+          "synonyms": [
+            "de sangue",
+            "exame de sangue",
+            "sangue"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "holter",
+          "synonyms": [
+            "hoter"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "mapa",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "teste ergometrico",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "tipo_orientacao",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "preparo_exame",
+          "synonyms": [
+            "antes do exame",
+            "como me preparar",
+            "me preparar para o exame",
+            "preparação",
+            "preparao para exame",
+            "preparar",
+            "preparo"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "resultado",
+          "synonyms": [
+            "laudo",
+            "meu resultado",
+            "resultado",
+            "resultado de exame"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "sintoma",
+          "synonyms": [
+            "estou sentindo algo",
+            "mal-estar",
+            "o que estou sentindo",
+            "problema de saúde",
+            "sintomas"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Desculpe, não consegui entender sua solicitação. Posso ajudar com informações sobre resultados, preparo para exames, agendamentos, sintomas e orientações iniciais de saúde. Você pode tentar reformular sua pergunta?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_10_1787931976806",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Termo exame",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual termo ou palavra do seu resultado você gostaria de entender?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1787671953464",
+      "conditions": "@duvida_resultado:termo",
+      "dialog_node": "node_10_1787672778037",
+      "previous_sibling": "node_6_1787672211843"
+    },
+    {
+      "type": "standard",
+      "title": "Relatar sintomas",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "conditions": "#relatar_sintoma",
+      "dialog_node": "node_10_1787678841065",
+      "previous_sibling": "node_8_1788051002002"
+    },
+    {
+      "type": "standard",
+      "title": "despedida",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Fico feliz em ter ajudado! Se precisar de mais alguma orientação, estarei por aqui. Até mais!\n"
+              },
+              {
+                "text": "Até mais! Se precisar de ajuda novamente, é só chamar.\n"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#despedida",
+      "dialog_node": "node_10_1787931976806",
+      "previous_sibling": "node_4_1787931671963"
+    },
+    {
+      "type": "standard",
+      "title": "Entender resultado",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Posso te ajudar. Você gostaria de entender um valor do exame, algum termo do laudo ou uma alteração no resultado?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#entender_resultado",
+      "dialog_node": "node_1_1787671953464",
+      "previous_sibling": "node_7_1787671397304"
+    },
+    {
+      "type": "standard",
+      "title": "falta de ar",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "A falta de ar pode ter diferentes causas e não é possível determinar a causa apenas por este atendimento. Se o sintoma for intenso, estiver piorando ou vier acompanhado de dor ou pressão no peito, confusão ou dificuldade importante para respirar, procure atendimento de emergência."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1787678841065",
+      "conditions": "@sintomas:falta_de_ar && #relatar_sintoma",
+      "dialog_node": "node_1_1787679457370"
+    },
+    {
+      "type": "standard",
+      "title": "fraqueza",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "A fraqueza pode ter diferentes causas e não é possível identificar a origem apenas por este atendimento. Se for intensa, surgir de repente ou vier acompanhada de dor no peito, falta de ar, tontura, desmaio ou dificuldade para falar ou movimentar alguma parte do corpo, procure atendimento médico imediatamente."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1787678841065",
+      "conditions": "@sintomas:fraqueza && #relatar_sintoma",
+      "dialog_node": "node_1_1787680088827",
+      "previous_sibling": "node_4_1787680057280"
+    },
+    {
+      "type": "standard",
+      "title": "nausea",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "A náusea pode ter diferentes causas e não é possível identificar a origem apenas por este atendimento. Se ela vier acompanhada de dor ou pressão no peito, falta de ar, suor frio, tontura ou palpitações, procure atendimento médico imediatamente."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1787678841065",
+      "conditions": "@sintomas:nausea && #relatar_sintoma",
+      "dialog_node": "node_1_1787680174026",
+      "previous_sibling": "node_8_1787680135042"
+    },
+    {
+      "type": "standard",
+      "title": "eco",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Certo! Para solicitar o agendamento do Ecocardiograma, informe a data  e o horário de sua preferência."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1787927128184",
+      "conditions": "@tipo_exame:ecocardiograma",
+      "dialog_node": "node_1_1787927285864",
+      "previous_sibling": "node_6_1787927264314"
+    },
+    {
+      "type": "standard",
+      "title": "resposta ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Perfeito! Sua preferência de agendamento foi registrada para <? @sys-date.reformatDateTime('dd/MM/yyyy') ?> às <? @sys-time.reformatDateTime('HH:mm') ?>."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1787927308611",
+      "conditions": "@sys-time && @sys-date",
+      "dialog_node": "node_1_1787931324705"
+    },
+    {
+      "type": "standard",
+      "title": "saudação",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá! Eu sou o CardioIA, um assistente virtual para orientações iniciais sobre exames e informações de saúde. Como posso ajudar você hoje?"
+              },
+              {
+                "text": "Olá! Como posso te ajudar com seus exames,\nresultados ou orientações de saúde?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome || #saudação",
+      "dialog_node": "node_1_1787931870455"
+    },
+    {
+      "type": "standard",
+      "title": "eletro ",
+      "parent": "node_8_1788051002002",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_5_1787673749174"
+      },
+      "conditions": "@tipo_exame:eletrocardiograma",
+      "dialog_node": "node_1_1788051045714"
+    },
+    {
+      "type": "standard",
+      "title": "mapa",
+      "parent": "node_8_1788051002002",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_2_1788050904611"
+      },
+      "conditions": "@tipo_exame:mapa",
+      "dialog_node": "node_1_1788051213136",
+      "previous_sibling": "node_9_1788051188751"
+    },
+    {
+      "type": "standard",
+      "title": "agendamento",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "conditions": "#agendamento",
+      "dialog_node": "node_2_1787927128184",
+      "previous_sibling": "node_5_1787680669142"
+    },
+    {
+      "type": "standard",
+      "title": "teste ergo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Certo! Para solicitar o agendamento do Teste Ergométrico, informe a data e o horário de sua preferência."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1787927128184",
+      "conditions": "@tipo_exame:(teste ergometrico)",
+      "dialog_node": "node_2_1787927201797",
+      "previous_sibling": "node_6_1787927157824"
+    },
+    {
+      "type": "standard",
+      "title": "resposta ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Perfeito! Sua preferência de agendamento foi registrada para <? @sys-date.reformatDateTime('dd/MM/yyyy') ?> às <? @sys-time.reformatDateTime('HH:mm') ?>."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_6_1787927264314",
+      "conditions": "@sys-time && @sys-date",
+      "dialog_node": "node_2_1787931350707"
+    },
+    {
+      "type": "standard",
+      "title": "Preparo eco ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para o ecocardiograma comum, geralmente não é necessário jejum ou preparo especial. Use roupas confortáveis e evite acessórios que possam atrapalhar o exame. Se o seu exame for transesofágico ou de estresse, o preparo pode ser diferente, então confirme as orientações específicas do serviço."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#preparo_exame && @tipo_exame:ecocardiograma",
+      "dialog_node": "node_2_1788050809388",
+      "previous_sibling": "node_7_1788050943505"
+    },
+    {
+      "type": "standard",
+      "title": "preparo mapa",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para o MAPA, geralmente não é necessário jejum. Tome banho antes da colocação do aparelho, use roupas confortáveis e mais largas, e mantenha sua rotina habitual durante o exame. O aparelho não deve ser molhado. Continue seus medicamentos normalmente, a menos que seu médico tenha orientado diferente."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#preparo_exame && @tipo_exame:mapa",
+      "dialog_node": "node_2_1788050904611",
+      "previous_sibling": "node_4_1788050867975"
+    },
+    {
+      "type": "standard",
+      "title": "cansaço ",
+      "parent": "node_8_1788051788892",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_4_1787680057280"
+      },
+      "conditions": "@sintomas:cansaco",
+      "dialog_node": "node_2_1788054196034",
+      "previous_sibling": "node_4_1788054172221"
+    },
+    {
+      "type": "standard",
+      "title": "Alteracao exame",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual alteração apareceu no seu resultado? Se puder, me informe também o nome do exame ou indicador."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1787671953464",
+      "conditions": "@duvida_resultado:alteração",
+      "dialog_node": "node_3_1787673303198",
+      "previous_sibling": "node_10_1787672778037"
+    },
+    {
+      "type": "standard",
+      "title": "Sintoma",
+      "parent": "node_5_1787680669142",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_10_1787678841065"
+      },
+      "conditions": "@tipo_orientacao:sintoma || #relatar_sintoma",
+      "dialog_node": "node_3_1787748655094",
+      "previous_sibling": "node_7_1787681158756"
+    },
+    {
+      "type": "standard",
+      "title": "resposta  ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Perfeito! Sua preferência de agendamento foi registrada para <? @sys-date.reformatDateTime('dd/MM/yyyy') ?> às <? @sys-time.reformatDateTime('HH:mm') ?>."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1787927233463",
+      "conditions": "@sys-time && @sys-date",
+      "dialog_node": "node_3_1787931382153"
+    },
+    {
+      "type": "standard",
+      "title": "fraqueza",
+      "parent": "node_8_1788051788892",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_1_1787680088827"
+      },
+      "conditions": "@sintomas:fraqueza",
+      "dialog_node": "node_3_1788054224093",
+      "previous_sibling": "node_2_1788054196034"
+    },
+    {
+      "type": "standard",
+      "title": "cansaço",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O cansaço pode ter diferentes causas, como esforço físico, falta de sono ou outras condições de saúde. Se for intenso, persistente ou vier acompanhado de falta de ar, dor no peito, tontura ou fraqueza importante, procure avaliação médica."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1787678841065",
+      "conditions": "@sintomas:cansaco && #relatar_sintoma",
+      "dialog_node": "node_4_1787680057280",
+      "previous_sibling": "node_8_1787680025828"
+    },
+    {
+      "type": "standard",
+      "title": "resposta  ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Perfeito! Sua preferência de agendamento foi registrada para <? @sys-date.reformatDateTime('dd/MM/yyyy') ?> às <? @sys-time.reformatDateTime('HH:mm') ?>."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1787927201797",
+      "conditions": "@sys-time && @sys-date",
+      "dialog_node": "node_4_1787931395651"
+    },
+    {
+      "type": "standard",
+      "title": "solicitar atendente",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Tudo bem! Vou transferir nossa conversa para um atendente. Em alguns minutos, ele dará continuidade ao atendimento.\n(Transferência não disponível neste protótipo.)"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#falar_com_atendente",
+      "dialog_node": "node_4_1787931671963",
+      "previous_sibling": "node_2_1787927128184"
+    },
+    {
+      "type": "standard",
+      "title": "preparo holter",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para o Holter, normalmente não é necessário jejum. Tome banho antes de colocar o aparelho, evite cremes ou produtos oleosos no peito e use roupas confortáveis. Durante o período de monitoramento, o aparelho não deve ser molhado. Mantenha seus medicamentos normalmente, a menos que seu médico tenha orientado diferente."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#preparo_exame && @tipo_exame:holter",
+      "dialog_node": "node_4_1788050867975",
+      "previous_sibling": "node_1_1787671953464"
+    },
+    {
+      "type": "standard",
+      "title": "pergunta generica ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual exame você gostaria de agendar?\n"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1787927128184",
+      "conditions": "#agendamento",
+      "dialog_node": "node_4_1788051387208",
+      "previous_sibling": "node_5_1787927308611"
+    },
+    {
+      "type": "standard",
+      "title": "palpitacao ",
+      "parent": "node_8_1788051788892",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_6_1787679979039"
+      },
+      "conditions": "@sintomas:palpitacao",
+      "dialog_node": "node_4_1788054172221",
+      "previous_sibling": "node_8_1788054117996"
+    },
+    {
+      "type": "standard",
+      "title": "nausea",
+      "parent": "node_8_1788051788892",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_1_1787680174026"
+      },
+      "conditions": "@sintomas:nausea",
+      "dialog_node": "node_4_1788054298347",
+      "previous_sibling": "node_5_1788054274955"
+    },
+    {
+      "type": "standard",
+      "title": "Prazo de entrega (exame)",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O prazo estimado para liberação do resultado é de até 5 dias."
+              },
+              {
+                "text": "Seu resultado ficará disponível em até 5 dias."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#prazo_entrega",
+      "dialog_node": "node_5_1787671295970",
+      "previous_sibling": "node_1_1787931870455"
+    },
+    {
+      "type": "standard",
+      "title": "Preparo exame eletro",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para o eletrocardiograma, normalmente não é necessário jejum. Vá com roupas confortáveis, evite cremes ou produtos na região do peito e informe os medicamentos que você usa. Siga também qualquer orientação específica fornecida pelo local do exame."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#preparo_exame && @tipo_exame:eletrocardiograma",
+      "dialog_node": "node_5_1787673749174",
+      "previous_sibling": "node_2_1788050809388"
+    },
+    {
+      "type": "standard",
+      "title": "dor no peito ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Dor no peito pode ter diferentes causas, e não é possível identificar a causa apenas por este atendimento. Se a dor for intensa, persistir, piorar ou vier acompanhada de falta de ar, tontura, suor frio ou náusea, procure atendimento médico imediatamente."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1787678841065",
+      "conditions": "@sintomas:dor_peito && #relatar_sintoma",
+      "dialog_node": "node_5_1787679735966",
+      "previous_sibling": "node_1_1787679457370"
+    },
+    {
+      "type": "standard",
+      "title": "Pedir orientação",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Posso fornecer orientações gerais, mas não substituir uma avaliação médica. Conte o que você está sentindo ou qual é sua dúvida para que eu possa direcionar melhor a informação."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#pedir_orientacao",
+      "dialog_node": "node_5_1787680669142",
+      "previous_sibling": "node_7_1787680580424"
+    },
+    {
+      "type": "standard",
+      "title": "holter",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Certo! Para solicitar o agendamento do Holter, informe a data  e o horário de sua preferência."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1787927128184",
+      "conditions": "@tipo_exame:holter",
+      "dialog_node": "node_5_1787927308611",
+      "previous_sibling": "node_1_1787927285864"
+    },
+    {
+      "type": "standard",
+      "title": "resposta",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Perfeito! Sua preferência de agendamento foi registrada para <? @sys-date.reformatDateTime('dd/MM/yyyy') ?> às <? @sys-time.reformatDateTime('HH:mm') ?>."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1787927285864",
+      "conditions": "@sys-time && @sys-date",
+      "dialog_node": "node_5_1787928414052"
+    },
+    {
+      "type": "standard",
+      "title": "resposta ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Perfeito! Sua preferência de agendamento foi registrada para <? @sys-date.reformatDateTime('dd/MM/yyyy') ?> às <? @sys-time.reformatDateTime('HH:mm') ?>."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_6_1787927157824",
+      "conditions": "@sys-time && @sys-date",
+      "dialog_node": "node_5_1787931410936"
+    },
+    {
+      "type": "standard",
+      "title": "desmaio",
+      "parent": "node_8_1788051788892",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_8_1787680135042"
+      },
+      "conditions": "@sintomas:desmaio",
+      "dialog_node": "node_5_1788054274955",
+      "previous_sibling": "node_3_1788054224093"
+    },
+    {
+      "type": "standard",
+      "title": "Valor exame",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual valor do seu exame você gostaria de entender?\nSe puder, informe também o nome do indicador."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1787671953464",
+      "conditions": "@duvida_resultado:valor",
+      "dialog_node": "node_6_1787672211843"
+    },
+    {
+      "type": "standard",
+      "title": "palpitacao ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Palpitações podem ocorrer por diferentes motivos, como estresse, esforço físico ou alterações no ritmo cardíaco. Se forem frequentes, durarem vários minutos ou estiverem piorando, procure avaliação médica. Se vierem acompanhadas de dor no peito, falta de ar intensa, tontura forte ou desmaio, procure atendimento de emergência."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1787678841065",
+      "conditions": "@sintomas:palpitacao && #relatar_sintoma",
+      "dialog_node": "node_6_1787679979039",
+      "previous_sibling": "node_5_1787679735966"
+    },
+    {
+      "type": "standard",
+      "title": "preparo de exame",
+      "parent": "node_5_1787680669142",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_5_1787673749174"
+      },
+      "conditions": "@tipo_orientacao:preparo_exame || #preparo_exame",
+      "dialog_node": "node_6_1787680949273"
+    },
+    {
+      "type": "standard",
+      "title": "Mapa",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Certo! Para solicitar o agendamento do mapa, informe a data e o horário de sua preferência."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1787927128184",
+      "conditions": "@tipo_exame:mapa",
+      "dialog_node": "node_6_1787927157824"
+    },
+    {
+      "type": "standard",
+      "title": "eletro",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Certo! Para solicitar o agendamento do eletrocardiograma, informe a data  e o horário de sua preferência."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1787927128184",
+      "conditions": "@tipo_exame:eletrocardiograma",
+      "dialog_node": "node_6_1787927264314",
+      "previous_sibling": "node_8_1787927233463"
+    },
+    {
+      "type": "standard",
+      "title": "eco",
+      "parent": "node_8_1788051002002",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_2_1788050809388"
+      },
+      "conditions": "@tipo_exame:ecocardiograma",
+      "dialog_node": "node_6_1788051160465",
+      "previous_sibling": "node_1_1788051045714"
+    },
+    {
+      "type": "standard",
+      "title": "teste ergo",
+      "parent": "node_8_1788051002002",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_7_1788050943505"
+      },
+      "conditions": "@tipo_exame:(teste ergometrico)",
+      "dialog_node": "node_6_1788051232810",
+      "previous_sibling": "node_1_1788051213136"
+    },
+    {
+      "type": "standard",
+      "title": "falta de ar",
+      "parent": "node_8_1788051788892",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_1_1787679457370"
+      },
+      "conditions": "@sintomas:falta_de_ar",
+      "dialog_node": "node_6_1788054115781"
+    },
+    {
+      "type": "standard",
+      "title": "Consultar resultados",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Após o prazo de liberação, seu resultado ficará disponível no portal do laboratório. Você poderá acessá-lo em www.labcardio.com.br."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#consultar_resultado",
+      "dialog_node": "node_7_1787671397304",
+      "previous_sibling": "node_5_1787671295970"
+    },
+    {
+      "type": "standard",
+      "title": "suor frio",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O suor frio pode ter diferentes causas. Se surgir de forma repentina ou vier acompanhado de dor ou pressão no peito, falta de ar, tontura, náusea ou desmaio, procure atendimento médico imediatamente."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1787678841065",
+      "conditions": "@sintomas:suor_frio && #relatar_sintoma",
+      "dialog_node": "node_7_1787680217107",
+      "previous_sibling": "node_1_1787680174026"
+    },
+    {
+      "type": "standard",
+      "title": "frequencia cardiaca",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Entendo. A frequência cardíaca pode variar de acordo com fatores como atividade física, estresse e repouso. Se o valor estiver muito diferente do seu habitual ou vier acompanhado de dor no peito, falta de ar, tontura ou desmaio, procure avaliação médica."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#informar_frequencia",
+      "dialog_node": "node_7_1787680580424",
+      "previous_sibling": "node_8_1787680442627"
+    },
+    {
+      "type": "standard",
+      "title": "Resultado",
+      "parent": "node_5_1787680669142",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_1_1787671953464"
+      },
+      "conditions": "@tipo_orientacao:resultado || #entender_resultado",
+      "dialog_node": "node_7_1787681158756",
+      "previous_sibling": "node_6_1787680949273"
+    },
+    {
+      "type": "standard",
+      "title": "preparo ergometrico",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para o teste ergométrico, use roupas leves e tênis adequados para exercício. Evite atividade física no dia do exame e não passe cremes ou produtos no peito. A alimentação deve ser leve antes do teste, sem refeições pesadas. Não suspenda medicamentos por conta própria; siga a orientação do médico ou do local do exame.”"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#preparo_exame && @tipo_exame:(teste ergometrico)",
+      "dialog_node": "node_7_1788050943505",
+      "previous_sibling": "node_2_1788050904611"
+    },
+    {
+      "type": "standard",
+      "title": "suor frio",
+      "parent": "node_8_1788051788892",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_7_1787680217107"
+      },
+      "conditions": "@sintomas:suor_frio",
+      "dialog_node": "node_7_1788054317588",
+      "previous_sibling": "node_4_1788054298347"
+    },
+    {
+      "type": "standard",
+      "title": "tontura",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "A tontura pode ter diferentes causas e não é possível identificar a origem apenas por este atendimento. Se ela for intensa, frequente, causar desmaio ou vier acompanhada de dor no peito, falta de ar, fraqueza intensa ou alteração na fala, procure atendimento médico imediatamente."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1787678841065",
+      "conditions": "@sintomas:tontura && #relatar_sintoma",
+      "dialog_node": "node_8_1787680025828",
+      "previous_sibling": "node_6_1787679979039"
+    },
+    {
+      "type": "standard",
+      "title": "desmaio",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O desmaio pode ter diferentes causas e precisa ser avaliado com atenção. Se aconteceu de forma repentina, se houve perda de consciência, ou se veio acompanhado de dor no peito, falta de ar, palpitações, fraqueza intensa ou dificuldade para falar ou se movimentar, procure atendimento médico imediatamente."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1787678841065",
+      "conditions": "@sintomas:desmaio && #relatar_sintoma",
+      "dialog_node": "node_8_1787680135042",
+      "previous_sibling": "node_1_1787680088827"
+    },
+    {
+      "type": "standard",
+      "title": "informar pressão",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "A pressão arterial deve ser interpretada considerando seu histórico e outras condições. Se o valor estiver muito diferente do habitual ou vier acompanhado de sintomas como dor no peito, falta de ar, tontura intensa ou desmaio, procure atendimento médico."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#informar_pressao",
+      "dialog_node": "node_8_1787680442627",
+      "previous_sibling": "node_10_1787678841065"
+    },
+    {
+      "type": "standard",
+      "title": "sangue",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Certo! Para solicitar o agendamento do Exame de sangue, informe a data e o horário de sua preferência."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1787927128184",
+      "conditions": "@tipo_exame:(exame sangue)",
+      "dialog_node": "node_8_1787927233463",
+      "previous_sibling": "node_2_1787927201797"
+    },
+    {
+      "type": "standard",
+      "title": "anything else - pergunta generica ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual exame você vai realizar?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#preparo_exame",
+      "dialog_node": "node_8_1788051002002",
+      "previous_sibling": "node_5_1787673749174"
+    },
+    {
+      "type": "standard",
+      "title": "pergunta generica ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Entendi... o que mais está sentindo?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1787678841065",
+      "conditions": "#relatar_sintoma",
+      "dialog_node": "node_8_1788051788892",
+      "previous_sibling": "node_7_1787680217107"
+    },
+    {
+      "type": "standard",
+      "title": "dor no peito",
+      "parent": "node_8_1788051788892",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_5_1787679735966"
+      },
+      "conditions": "@sintomas:dor_peito",
+      "dialog_node": "node_8_1788054117996",
+      "previous_sibling": "node_6_1788054115781"
+    },
+    {
+      "type": "standard",
+      "title": "holter",
+      "parent": "node_8_1788051002002",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_4_1788050867975"
+      },
+      "conditions": "@tipo_exame:holter",
+      "dialog_node": "node_9_1788051188751",
+      "previous_sibling": "node_6_1788051160465"
+    },
+    {
+      "type": "standard",
+      "title": "tontura",
+      "parent": "node_8_1788051788892",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_8_1787680025828"
+      },
+      "conditions": "@sintomas:tontura",
+      "dialog_node": "node_9_1788054806816",
+      "previous_sibling": "node_7_1788054317588"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "Você quis dizer:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "Nenhuma das anteriores",
+      "use_connect_to_support_prompt": "Connect to support",
+      "single_answer_clarification_prompt": "Something else"
+    },
+    "human_agent_assist": {
+      "prompt": "Você quis dizer:"
+    }
+  },
+  "learning_opt_out": false,
+  "language": "pt-br",
+  "description": "",
+  "name": "Assistente Cardiológico Inteligente-dialog"
+}

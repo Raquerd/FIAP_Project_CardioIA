@@ -1,0 +1,149 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2870
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Arial-BoldMT;\f1\fswiss\fcharset0 ArialMT;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28860\viewh17400\viewkind0
+\deftab720
+\pard\pardeftab720\sa298\partightenfactor0
+
+\f0\b\fs36 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Relat\'f3rio \'97 Assistente Cardiol\'f3gico Conversacional CardioIA\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\fs28 \cf0 1. Objetivo\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0\fs24 \cf0 Nesta etapa do CardioIA foi desenvolvido um assistente conversacional utilizando o 
+\f0\b IBM Watson Assistant
+\f1\b0 .\
+O objetivo \'e9 simular um atendimento inicial em sa\'fade, permitindo que o usu\'e1rio fa\'e7a perguntas sobre exames, resultados, sintomas e agendamentos.\
+O chatbot n\'e3o realiza diagn\'f3stico m\'e9dico. Ele apenas fornece orienta\'e7\'f5es gerais e direciona o usu\'e1rio de acordo com a situa\'e7\'e3o informada.\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f0\b\fs28 \cf0 2. Funcionamento do chatbot\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0\fs24 \cf0 O assistente foi criado utilizando 
+\f0\b intents, entities e dialog nodes
+\f1\b0 .\
+As 
+\f0\b intents
+\f1\b0  representam o que o usu\'e1rio deseja fazer. Foram criadas inten\'e7\'f5es como:\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs26 \cf0 #saudacao
+\fs24 , 
+\fs26 #prazo_entrega
+\fs24 , 
+\fs26 #consultar_resultado
+\fs24 , 
+\fs26 #entender_resultado
+\fs24 , 
+\fs26 #preparo_exame
+\fs24 , 
+\fs26 #agendamento
+\fs24 , 
+\fs26 #relatar_sintoma
+\fs24 , 
+\fs26 #informar_pressao
+\fs24 , 
+\fs26 #informar_frequencia
+\fs24 , 
+\fs26 #pedir_orientacao
+\fs24 , 
+\fs26 #falar_com_atendente
+\fs24  e 
+\fs26 #despedida
+\fs24 .\
+Para cada intent foram adicionadas v\'e1rias frases de exemplo, para que o Watson consiga reconhecer diferentes formas de fazer a mesma pergunta.\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f0\b\fs28 \cf0 3. Uso das entities\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0\fs24 \cf0 As 
+\f0\b entities
+\f1\b0  s\'e3o utilizadas para identificar informa\'e7\'f5es espec\'edficas dentro da mensagem.\
+Por exemplo, foi criada a entity 
+\fs26 @tipo_exame
+\fs24 , com exames como eletrocardiograma, ecocardiograma, Holter, MAPA e teste ergom\'e9trico.\
+Assim, ao receber a frase:\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \'93Preciso fazer jejum para o Holter?\'94\
+o sistema identifica:\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs26 \cf0 #preparo_exame
+\fs24  + 
+\fs26 @tipo_exame:holter
+\fs24 \
+e consegue responder diretame\'e5nte com as orienta\'e7\'f5es do Holter.\
+Tamb\'e9m foi criada a entity 
+\fs26 @sintomas
+\fs24 , com valores como falta de ar, dor no peito, palpita\'e7\'e3o, tontura, cansa\'e7o, fraqueza, desmaio, n\'e1usea e suor frio.\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f0\b\fs28 \cf0 4. Fluxo de decis\'e3o\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0\fs24 \cf0 Os 
+\f0\b dialog nodes
+\f1\b0  organizam o caminho da conversa.\
+Por exemplo:\
+\pard\pardeftab720\partightenfactor0
+
+\fs26 \cf0 \
+Usu\'e1rio relata um sintoma\
+\uc0\u8595 \
+Watson reconhece #relatar_sintoma\
+\uc0\u8595 \
+identifica @sintomas\
+\uc0\u8595 \
+seleciona a resposta correspondente\
+\uc0\u8595 \
+fornece uma orienta\'e7\'e3o inicial\
+\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\fs24 \cf0 Se o usu\'e1rio escrever:\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \'93Estou com falta de ar.\'94\
+o sistema reconhece o sintoma e fornece uma orienta\'e7\'e3o espec\'edfica.\
+Se o usu\'e1rio disser apenas:\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \'93N\'e3o estou me sentindo bem.\'94\
+o sistema entende que existe um relato de sintoma, mas ainda n\'e3o sabe qual. Ent\'e3o pergunta:\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \'93Pode me dizer o que voc\'ea est\'e1 sentindo?\'94\
+A partir da resposta, o fluxo continua.\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f0\b\fs28 \cf0 5. Outros fluxos\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0\fs24 \cf0 No fluxo 
+\fs26 #entender_resultado
+\fs24 , o chatbot pergunta se a d\'favida \'e9 sobre 
+\f0\b um valor, um termo ou uma altera\'e7\'e3o
+\f1\b0 . Cada op\'e7\'e3o direciona para um child node diferente.\
+No 
+\fs26 #agendamento
+\fs24 , o sistema identifica o tipo de exame e solicita a data e o hor\'e1rio desejados. As entities do pr\'f3prio Watson 
+\fs26 @sys-date
+\fs24  e 
+\fs26 @sys-time
+\fs24  s\'e3o utilizadas para identificar essas informa\'e7\'f5es.\
+Tamb\'e9m foi criado um 
+\fs26 anything_else
+\fs24  para situa\'e7\'f5es em que o chatbot n\'e3o entende a solicita\'e7\'e3o. Nesse caso, ele pede que o usu\'e1rio reformule a pergunta e informa os assuntos com os quais consegue ajudar.\
+\pard\pardeftab720\sa280\partightenfactor0
+
+\f0\b\fs28 \cf0 6. Contexto de sa\'fade\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f1\b0\fs24 \cf0 Por se tratar de um assistente de sa\'fade, as respostas foram desenvolvidas para n\'e3o realizar diagn\'f3sticos.\
+Nos casos de sintomas, o CardioIA apresenta orienta\'e7\'f5es gerais e informa quando \'e9 importante procurar atendimento m\'e9dico.\
+Tamb\'e9m existe a op\'e7\'e3o de solicitar atendimento humano por meio da intent 
+\fs26 #falar_com_atendente
+\fs24 , simulando uma poss\'edvel transfer\'eancia para um atendente em uma aplica\'e7\'e3o real.\
+}
