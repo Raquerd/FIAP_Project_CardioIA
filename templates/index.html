@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioIA - Assistente Cardiológico Conversacional</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-hover: #0369a1;
+            --primary-light: #e0f2fe;
+            --bg-page: #f1f5f9;
+            --chat-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --bot-bubble: #f8fafc;
+            --user-bubble: #0284c7;
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .chat-app {
+            width: 100%;
+            max-width: 600px;
+            height: 92vh;
+            background: var(--chat-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        /* Header */
+        .chat-header {
+            padding: 18px 24px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.3);
+        }
+
+        .title-area h1 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.01em;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-reset {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-reset:hover {
+            background: #f8fafc;
+            color: var(--danger);
+            border-color: #fecaca;
+        }
+
+        /* Notification disclaimer */
+        .ethical-banner {
+            background: #fef3c7;
+            border-bottom: 1px solid #fde68a;
+            padding: 8px 16px;
+            font-size: 0.75rem;
+            color: #92400e;
+            text-align: center;
+        }
+
+        /* Message Area */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background: #f8fafc;
+        }
+
+        .msg-wrapper {
+            display: flex;
+            flex-direction: column;
+            max-width: 85%;
+        }
+
+        .msg-wrapper.bot {
+            align-self: flex-start;
+        }
+
+        .msg-wrapper.user {
+            align-self: flex-end;
+        }
+
+        .bubble {
+            padding: 14px 18px;
+            border-radius: 18px;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .bot .bubble {
+            background: #ffffff;
+            color: var(--text-dark);
+            border-bottom-left-radius: 4px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .user .bubble {
+            background: var(--user-bubble);
+            color: #ffffff;
+            border-bottom-right-radius: 4px;
+        }
+
+        .timestamp {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            padding: 0 4px;
+        }
+
+        .user .timestamp {
+            text-align: right;
+        }
+
+        /* Suggestions chips */
+        .suggestions-bar {
+            padding: 10px 16px;
+            background: #ffffff;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .suggestions-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chip {
+            background: var(--primary-light);
+            color: var(--primary-hover);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .chip:hover {
+            background: #bae6fd;
+            transform: translateY(-1px);
+        }
+
+        /* Input Area */
+        .chat-input-area {
+            padding: 16px;
+            background: #ffffff;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .input-box {
+            flex: 1;
+            padding: 12px 18px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            font-size: 0.92rem;
+            outline: none;
+            transition: border-color 0.2s;
+            background: #f8fafc;
+        }
+
+        .input-box:focus {
+            border-color: var(--primary);
+            background: #ffffff;
+        }
+
+        .btn-send {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .btn-send:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-send:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+            background: #ffffff;
+            border-radius: 16px;
+            width: fit-content;
+            border: 1px solid var(--border);
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: blink 1.4s infinite both;
+        }
+
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes blink {
+            0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+            40% { opacity: 1; transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-app">
+    <!-- Header -->
+    <header class="chat-header">
+        <div class="header-info">
+            <div class="avatar">🏥</div>
+            <div class="title-area">
+                <h1>CardioIA</h1>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    <span id="connection-status">Conectado ao Watson</span>
+                </div>
+            </div>
+        </div>
+        <button class="btn-reset" onclick="resetConversation()" title="Reiniciar conversa">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            Nova Conversa
+        </button>
+    </header>
+
+    <!-- Ethical notice -->
+    <div class="ethical-banner">
+        ⚠️ <b>Aviso:</b> Este assistente oferece orientações preliminares e não substitui uma consulta médica formal.
+    </div>
+
+    <!-- Messages Container -->
+    <main class="chat-messages" id="chat-messages">
+        <!-- Messages will be dynamically rendered here -->
+    </main>
+
+    <!-- Suggestion Chips -->
+    <div class="suggestions-bar">
+        <button class="chip" onclick="quickSend('Como agendar um ecocardiograma?')">📅 Agendar Ecocardiograma</button>
+        <button class="chip" onclick="quickSend('Preciso de jejum para o Holter?')">🩺 Preparo do Holter</button>
+        <button class="chip" onclick="quickSend('Estou sentindo uma forte dor no peito')">🚨 Sinto dor no peito</button>
+        <button class="chip" onclick="quickSend('Gostaria de falar com um atendente')">👤 Falar com Atendente</button>
+    </div>
+
+    <!-- Input Form -->
+    <form class="chat-input-area" id="chat-form" onsubmit="handleUserSubmit(event)">
+        <input 
+            type="text" 
+            class="input-box" 
+            id="user-input" 
+            placeholder="Digite sua dúvida ou sintoma..." 
+            autocomplete="off"
+            required
+        >
+        <button type="submit" class="btn-send" id="btn-send" title="Enviar mensagem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+        </button>
+    </form>
+</div>
+
+<script>
+    let currentSessionId = null;
+    const messagesContainer = document.getElementById('chat-messages');
+    const userInput = document.getElementById('user-input');
+    const btnSend = document.getElementById('btn-send');
+    const statusText = document.getElementById('connection-status');
+
+    // Inicialização da Sessão
+    async function initSession() {
+        showTypingIndicator();
+        try {
+            const res = await fetch('/api/session', { method: 'POST' });
+            const data = await res.json();
+            if (data.status === 'success') {
+                currentSessionId = data.session_id;
+                statusText.innerText = "Assistente Ativo";
+                
+                // Enviar gatilho inicial para mensagem de boas vindas
+                await sendMessageToApi("Olá");
+            } else {
+                removeTypingIndicator();
+                addMessage("bot", "Não foi possível conectar ao assistente no momento. Tente recarregar a página.");
+            }
+        } catch (err) {
+            removeTypingIndicator();
+            console.error("Erro ao inicializar sessão:", err);
+            statusText.innerText = "Offline";
+            addMessage("bot", "Erro de conexão com o servidor local. Verifique se o backend Flask está ativo.");
+        }
+    }
+
+    // Enviar mensagem para a API
+    async function sendMessageToApi(text) {
+        try {
+            const response = await fetch('/api/message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    session_id: currentSessionId,
+                    message: text
+                })
+            });
+
+            removeTypingIndicator();
+            const data = await response.json();
+
+            if (data.status === 'success') {
+                if (data.session_id) currentSessionId = data.session_id;
+                
+                if (data.messages && data.messages.length > 0) {
+                    data.messages.forEach(msg => {
+                        if (msg.type === 'text') {
+                            addMessage('bot', msg.text);
+                        } else if (msg.type === 'option') {
+                            addMessage('bot', `${msg.title || ''}\n${msg.options.join(' • ')}`);
+                        }
+                    });
+                }
+            } else {
+                addMessage('bot', data.message || "Desculpe, ocorreu uma instabilidade temporária.");
+            }
+        } catch (error) {
+            removeTypingIndicator();
+            console.error("Erro na comunicação:", error);
+            addMessage('bot', "Erro ao comunicar com a API do assistente.");
+        }
+    }
+
+    // Manipular envio do usuário
+    async function handleUserSubmit(e) {
+        e.preventDefault();
+        const text = userInput.value.trim();
+        if (!text) return;
+
+        addMessage('user', text);
+        userInput.value = '';
+        btnSend.disabled = true;
+
+        showTypingIndicator();
+        await sendMessageToApi(text);
+        btnSend.disabled = false;
+        userInput.focus();
+    }
+
+    // Envio rápido via chips
+    function quickSend(text) {
+        userInput.value = text;
+        document.getElementById('chat-form').dispatchEvent(new Event('submit'));
+    }
+
+    // Adicionar mensagem à tela
+    function addMessage(sender, text) {
+        const wrapper = document.createElement('div');
+        wrapper.className = `msg-wrapper ${sender}`;
+
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        bubble.innerText = text;
+
+        const time = document.createElement('div');
+        time.className = 'timestamp';
+        const now = new Date();
+        time.innerText = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        wrapper.appendChild(bubble);
+        wrapper.appendChild(time);
+        messagesContainer.appendChild(wrapper);
+
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Indicador de digitação
+    function showTypingIndicator() {
+        removeTypingIndicator();
+        const indicator = document.createElement('div');
+        indicator.id = 'typing-indicator';
+        indicator.className = 'msg-wrapper bot';
+        indicator.innerHTML = `
+            <div class="typing-indicator">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        `;
+        messagesContainer.appendChild(indicator);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+        const ind = document.getElementById('typing-indicator');
+        if (ind) ind.remove();
+    }
+
+    // Reiniciar conversa
+    async function resetConversation() {
+        if (currentSessionId) {
+            try {
+                await fetch(`/api/session/${currentSessionId}`, { method: 'DELETE' });
+            } catch (e) {}
+        }
+        messagesContainer.innerHTML = '';
+        currentSessionId = null;
+        initSession();
+    }
+
+    // Iniciar ao carregar a página
+    window.addEventListener('DOMContentLoaded', initSession);
+</script>
+
+</body>
+</html>
