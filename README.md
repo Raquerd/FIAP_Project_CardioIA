@@ -17,13 +17,14 @@ Caique Nonato da Silva Bezerra
 
 # Organização do projeto
 
-* **config:** Centraliza arquivos de configuração, mapeamento de sintomas (.csv), dicionários de regras, diagramas e os pesos dos modelos CNN salvos (`.pth`).
-* **docs:** Reservada para a base de conhecimento textual e documentação técnica, incluindo relatórios em PDF do ESP32 e Node-RED.
-* **scripts:** Contém os notebooks (.ipynb) de análise e treinamento, o script principal de treinamento de deep learning (`cardioia_treinamento_cnn.py`), o protótipo Streamlit (`cardioia_prototype.py`) e o código fonte em C++ do ESP32 (`skecth_esp32.ino`).
+* **config:** Centraliza arquivos de configuração, mapeamento de sintomas (.csv), dicionários de regras, diagramas, os pesos dos modelos CNN salvos (`.pth`) e a exportação do Watson Assistant (`watson_assistant_skill.json`).
+* **docs:** Reservada para a base de conhecimento textual e documentação técnica, incluindo relatórios do ESP32, Node-RED e Watson Assistant.
+* **scripts:** Contém os notebooks (.ipynb), script de treinamento CNN (`cardioia_treinamento_cnn.py`), protótipo Streamlit (`cardioia_prototype.py`), código C++ do ESP32 (`skecth_esp32.ino`), serviço do Watson (`watson_service.py`), backend Flask (`app.py`) e suíte de testes (`test_watson_api.py`).
+* **templates / static:** Interface web moderna de interação com o assistente conversacional.
 * **temp:** Diretório destinado a arquivos gerados durante a execução, logs de processamento e tabelas de testes temporárias.
-* **assets:** Armazena os ativos fundamentais do projeto, como a base de dados cardiologia (`heart.csv`), o conjunto completo de imagens de ECG originais e o conjunto final de dados tratados e divididos de forma estratificada para as redes neurais (`dataset_final`).
-* **requirements.txt:** Arquivo com a listagem de todas as bibliotecas Python necessárias para executar o treinamento e o protótipo.
-* **main.bat:** Script inicializador automatizado para Windows que instala as dependências do `requirements.txt` e inicia o protótipo Streamlit.
+* **assets:** Armazena os ativos do projeto, dados cardiologia (`heart.csv`), exames de ECG e imagens de dashboards.
+* **requirements.txt:** Listagem de todas as bibliotecas Python necessárias para execução do ecossistema.
+* **main.bat:** Script inicializador automatizado interativo para Windows com menu de opções para a Fase 4 e Fase 5.
 
 ---  
 
@@ -194,3 +195,100 @@ Criamos uma aplicação web local de demonstração em poucas linhas de código 
     streamlit run scripts/cardioia_prototype.py
     ```
     O aplicativo abrirá no seu navegador padrão em `http://localhost:8501`.
+
+
+---
+
+## 💬 Fase 5: Assistente Cardiológico Conversacional (IBM Watson Assistant & Flask API)
+
+Na Fase 5, o ecossistema **CardioIA** avança para o desenvolvimento de um **Assistente Cardiológico Conversacional (Chatbot)**, capaz de orientar pacientes, interpretar relatos clínicos em linguagem natural, esclarecer dúvidas de exames e simular protocolos reais de triagem hospitalar.
+
+### 👥 Divisão de Atividades
+* **Lais Kurahashi:** Modelagem Conversacional no IBM Watson Assistant (Intenções, Entidades e Árvore de Decisão), exportação JSON da Skill e Relatório Técnico e Conceitual de Saúde.
+* **Davi Ferreira:** Desenvolvimento do Backend em Python (Flask), integração com a API v2 do Watson Assistant, construção e integração da interface web conversacional, gerenciamento de sessões, governança técnica do repositório, bateria de testes automatizados e roteiro de validação.
+
+---
+
+### 🏗️ Arquitetura da Solução Conversacional
+
+```mermaid
+flowchart LR
+    User["Paciente / Usuário"] <--> WebUI["Interface Web (HTML/CSS/JS)"]
+    WebUI <--> API["Backend Flask API (app.py)"]
+    API <--> Service["Watson Service (watson_service.py)"]
+    Service <--> Watson["IBM Watson Assistant v2 (Cloud)"]
+```
+
+1. **Camada de Inteligência e NLP (IBM Watson Assistant):**
+   * **12 Intenções (`#intents`):** `#saudacao`, `#relatar_sintoma`, `#preparo_exame`, `#agendamento`, `#consultar_resultado`, `#entender_resultado`, `#prazo_entrega`, `#informar_pressao`, `#informar_frequencia`, `#pedir_orientacao`, `#falar_com_atendente`, `#despedida`.
+   * **6 Entidades (`@entities`):** `@tipo_exame` (*ecocardiograma, holter, mapa, eletrocardiograma, teste ergometrico*), `@sintomas` (*dor_peito, falta_de_ar, palpitacao, etc.*), `@duvida_resultado`, `@tipo_orientacao`, `@sys-date`, `@sys-time`.
+   * **61 Nós de Diálogo:** Árvore de decisão com desambiguação clínica, confirmação dinâmica de agendamentos e transbordo para atendente humano.
+   * **Governança e Ética:** O assistente não realiza diagnósticos médicos definitivos, focando em acolhimento empático, triagem preventiva e orientação segura.
+
+2. **Camada de Integração Backend (Python + Flask):**
+   * Módulo desacoplado `WatsonAssistantService` em [`scripts/watson_service.py`](./scripts/watson_service.py).
+   * Servidor Flask REST em [`scripts/app.py`](./scripts/app.py) com CORS habilitado e gerenciamento de sessões e reconexão automática.
+   * Arquivo de configuração de credenciais via variáveis de ambiente (`.env`).
+
+3. **Interface de Interação com o Usuário:**
+   * Aplicação web responsiva estilizada em [`templates/index.html`](./templates/index.html), com chat em tempo real, indicador de digitação (*typing indicator*), botões de sugestão rápida (*chips*) e alerta ético de uso.
+
+---
+
+### 🔌 Documentação da API REST
+
+| Método | Endpoint | Descrição | Exemplo de Payload |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/status` | Health Check da API e status da conexão com Watson | N/A |
+| `POST` | `/api/session` | Cria uma nova sessão no Watson Assistant v2 | N/A |
+| `POST` | `/api/message` | Envia mensagem do paciente e recebe o laudo de resposta | `{"session_id": "...", "message": "Estou sentindo dor no peito"}` |
+| `DELETE` | `/api/session/<id>` | Encerra e desaloca a sessão aberta no Watson | N/A |
+
+---
+
+### 🧪 Bateria de Testes Automatizados
+
+O projeto inclui uma suíte automatizada de testes clínicos em [`scripts/test_watson_api.py`](./scripts/test_watson_api.py) cobrindo:
+1. **Health Check da API** (Status 200 e Watson conectado).
+2. **Ciclo de Vida de Sessão** (Criação e desalocação).
+3. **Fluxo de Boas-Vindas** (`#saudacao`).
+4. **Triagem Clínica Crítica** (`#relatar_sintoma` com `@sintomas:dor_peito`).
+5. **Preparo de Exame** (`#preparo_exame` com `@tipo_exame:holter`).
+6. **Agendamento Cardiológico** (`#agendamento` com `@tipo_exame:ecocardiograma`).
+7. **Transbordo para Atendente Humano** (`#falar_com_atendente`).
+
+Para executar a bateria de testes:
+```powershell
+python scripts/test_watson_api.py
+```
+
+---
+
+### 🚀 Como Executar o CardioIA (Fase 5)
+
+1. **Inicialização Automatizada (Recomendado):**
+   Execute o script `main.bat` na raiz do projeto e selecione a opção `[1]` para iniciar o Chatbot ou `[3]` para rodar os testes:
+   ```powershell
+   .\main.bat
+   ```
+   Acesse a interface no navegador em: **`http://localhost:5000`**
+
+2. **Execução Manual da API:**
+   ```powershell
+   pip install -r requirements.txt
+   python scripts/app.py
+   ```
+
+---
+
+### 📹 Roteiro Sugerido para Vídeo Demonstrativo (Até 5 Minutos)
+
+* **0:00 - 1:00 (Abertura e Contexto):** Apresentação dos integrantes, turma e o objetivo da Fase 5 (criação do Assistente Cardiológico com Watson Assistant e Flask).
+* **1:00 - 2:15 (Modelagem Watson):** Apresentação rápida da árvore de diálogo, intenções (#relatar_sintoma, #agendamento, #preparo_exame) e justificativa ética em saúde.
+* **2:15 - 3:30 (Demonstração do Chatbot em Tempo Real):**
+  * Mensagem inicial de acolhimento.
+  * Teste do preparo do exame (ex.: "Preciso de jejum para o Holter?").
+  * Teste de relato de sintoma crítico (ex.: "Sinto dor forte no peito e aperto").
+  * Teste de solicitação de agendamento e transbordo para atendente humano.
+* **3:30 - 4:30 (Arquitetura Backend & Testes):** Exibição da execução dos testes automatizados (`python scripts/test_watson_api.py`) no terminal, comprovando a integração via API REST.
+* **4:30 - 5:00 (Conclusão e Próximos Passos):** Considerações finais sobre o ecossistema integrado CardioIA.
