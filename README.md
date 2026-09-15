@@ -278,17 +278,3 @@ python scripts/test_watson_api.py
    pip install -r requirements.txt
    python scripts/app.py
    ```
-
----
-
-### 📹 Roteiro Sugerido para Vídeo Demonstrativo (Até 5 Minutos)
-
-* **0:00 - 1:00 (Abertura e Contexto):** Apresentação dos integrantes, turma e o objetivo da Fase 5 (criação do Assistente Cardiológico com Watson Assistant e Flask).
-* **1:00 - 2:15 (Modelagem Watson):** Apresentação rápida da árvore de diálogo, intenções (#relatar_sintoma, #agendamento, #preparo_exame) e justificativa ética em saúde.
-* **2:15 - 3:30 (Demonstração do Chatbot em Tempo Real):**
-  * Mensagem inicial de acolhimento.
-  * Teste do preparo do exame (ex.: "Preciso de jejum para o Holter?").
-  * Teste de relato de sintoma crítico (ex.: "Sinto dor forte no peito e aperto").
-  * Teste de solicitação de agendamento e transbordo para atendente humano.
-* **3:30 - 4:30 (Arquitetura Backend & Testes):** Exibição da execução dos testes automatizados (`python scripts/test_watson_api.py`) no terminal, comprovando a integração via API REST.
-* **4:30 - 5:00 (Conclusão e Próximos Passos):** Considerações finais sobre o ecossistema integrado CardioIA.
