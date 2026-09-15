@@ -34,8 +34,9 @@ goto MENU
 cls
 echo =======================================================
 echo Iniciando Servidor Flask do Chatbot CardioIA...
-echo Abrindo automaticamente no navegador em: http://localhost:5000
+echo Acesso: http://localhost:5000
 echo =======================================================
+start http://localhost:5000
 python scripts/app.py
 pause
 cls
@@ -46,7 +47,7 @@ cls
 echo =======================================================
 echo Iniciando Prototipo de Visao Computacional / ECG...
 echo =======================================================
-streamlit run scripts/cardioia_prototype.py
+python -m streamlit run scripts/cardioia_prototype.py
 pause
 cls
 goto MENU

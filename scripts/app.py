@@ -152,17 +152,9 @@ def delete_session(session_id):
 
 
 if __name__ == '__main__':
-    import threading
-    import webbrowser
-
     port = int(os.getenv('PORT', 5000))
-    debug_mode = os.getenv('FLASK_ENV', 'development') == 'development'
-    
-    # Abre o navegador automaticamente após 1 segundo
-    def abrir_navegador():
-        webbrowser.open_new(f"http://localhost:{port}")
-        
-    threading.Timer(1.0, abrir_navegador).start()
-    
-    logger.info(f"Iniciando servidor CardioIA Flask na porta {port} (Debug: {debug_mode})...")
-    app.run(host='0.0.0.0', port=port, debug=debug_mode)
+    logger.info(f"Iniciando servidor CardioIA Flask na porta {port}...")
+    print(f"\n=======================================================")
+    print(f" Servidor CardioIA Chatbot Online: http://localhost:{port}")
+    print(f"=======================================================\n")
+    app.run(host='0.0.0.0', port=port, debug=False)
