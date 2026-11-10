@@ -387,3 +387,228 @@ O modelo Random Forest previu classe pico_risco=1 com probabilidade estimada de 
 * **Link do Vídeo no YouTube (Não Listado):** **[FIAP - Cardio IA - Fase 6 (https://youtu.be/ZiV1SSPbsR0)](https://youtu.be/ZiV1SSPbsR0)**
 * **Repositório Oficial no GitHub:** **[https://github.com/Raquerd/FIAP_Project_CardioIA](https://github.com/Raquerd/FIAP_Project_CardioIA)**
 
+---
+
+# Fase 7 – Deploy, Integração Web e Aplicativo Mobile
+
+## 1. Visão geral da entrega
+
+Nesta etapa, o CardioIA foi ampliado com uma aplicação Web e um aplicativo Mobile integrados a um backend responsável pela autenticação e pelo processamento das imagens de eletrocardiograma (ECG).
+
+**Tecnologias utilizadas:**
+
+| Componente | Tecnologia |
+|---|---|
+| Frontend Web | React e Vite |
+| Aplicativo Mobile | React Native e Expo |
+| Backend | Python e Flask |
+| Servidor WSGI | Gunicorn |
+| Inteligência artificial | CNN e ResNet50 |
+| Autenticação | Supabase |
+| Histórico Web | IndexedDB |
+| Hospedagem Web | Vercel |
+| Hospedagem do backend | AWS Elastic Beanstalk |
+| Build Mobile | Expo Application Services (EAS) |
+
+## 2. Links para avaliação
+
+- **Aplicação Web publicada:** https://fiap-project-cardio-ia-delta.vercel.app
+- **Aplicativo Android (APK):** [[Baixar CardioIA](https://expo.dev/artifacts/eas/5-zVREEnJZ6c7p0Ryhjkn65hlqBnIuC4IfWS9qX_5JI.apk)](https://expo.dev/accounts/laykura/projects/cardioia-mobile/builds/c17470c5-3da4-40c6-aa25-ef0d2f3db23c)
+  <img width="612" height="568" alt="image" src="https://github.com/user-attachments/assets/98f597c5-0cad-423b-8cf1-ea5df125deea" />
+- **Projeto Mobile no Expo:** https://expo.dev/accounts/laykura/projects/cardioia-mobile
+
+## 3. Aplicação Web
+
+A aplicação Web está publicada na Vercel:
+
+https://fiap-project-cardio-ia-delta.vercel.app
+
+O frontend permite realizar autenticação, selecionar imagens de ECG, escolher o modelo de inteligência artificial e visualizar os resultados retornados pelo backend.
+
+O histórico da aplicação Web utiliza IndexedDB, armazenando as análises localmente no navegador.
+
+O arquivo `web/vercel.json` configura o encaminhamento das requisições destinadas à API para o backend hospedado na AWS e o fallback para as rotas da aplicação frontend.
+
+## 4. Backend e infraestrutura AWS
+
+O backend foi desenvolvido em Flask e hospedado no AWS Elastic Beanstalk.
+
+- Aplicação: `cardioia`
+- Ambiente: `cardioia-env`
+- Região: `us-east-2` (Ohio)
+
+**Endpoint base:**
+
+http://cardioia-env.eba-unfydca4.us-east-2.elasticbeanstalk.com
+
+Entre as rotas disponibilizadas estão:
+
+| Método | Rota | Finalidade |
+|---|---|---|
+| GET | `/api/status` | Verificar a disponibilidade da API |
+| POST | `/api/ecg/analisar` | Receber a imagem e executar a análise do ECG |
+
+A rota de análise exige autenticação por token Bearer do Supabase, recebe a imagem por multipart/form-data e permite selecionar o modelo `cnn` ou `resnet50`.
+
+O resultado contém a classificação e as probabilidades calculadas pelo modelo utilizado.
+
+O arquivo `Procfile` configura a inicialização do backend com Gunicorn.
+
+## 5. Aplicativo Mobile
+
+O aplicativo foi desenvolvido com React Native e Expo.
+
+- Nome: CardioIA
+- Identificador Android: `br.com.cardioia.mobile`
+- Projeto Expo: `cardioia-mobile`
+
+### Funcionalidades
+
+- Cadastro e autenticação de usuários.
+- Persistência da sessão com Supabase.
+- Seleção de imagens de ECG na galeria do dispositivo.
+- Seleção entre os modelos CNN e ResNet50.
+- Envio da imagem ao backend autenticado.
+- Exibição da classificação e das probabilidades retornadas pela API.
+- Navegação entre as telas de início, análise, histórico e conta.
+
+O envio da imagem utiliza `expo-file-system/legacy`, com requisição multipart/form-data e token de acesso no cabeçalho `Authorization`.
+
+### Build Android
+
+O APK foi gerado pelo Expo Application Services (EAS), utilizando o perfil `preview`, com distribuição interna.
+
+Para gerar um novo APK:
+
+```bash
+cd mobile
+npm install
+npx eas-cli build --platform android --profile preview
+```
+
+A configuração de build está em `mobile/eas.json`, e os dados do aplicativo estão em `mobile/app.json`.
+
+### Como baixar o CardioIA
+
+**Requisitos:** celular com sistema Android e conexão com a internet.
+
+1. Abra o link **Baixar CardioIA (APK)** pelo navegador do celular.
+2. Toque em **Baixar** para fazer o download do aplicativo.
+3. Aguarde o download terminar.
+4. Abra o arquivo baixado, chamado CardioIA.apk ou semelhante.
+5. Se o Android exibir um aviso de segurança, toque em **Configurações** e permita a instalação de aplicativos dessa fonte (por exemplo, Chrome).
+6. Volte para a tela de instalação e toque em **Instalar**.
+7. Quando a instalação terminar, toque em **Abrir**.
+8. Faça login ou crie uma conta para começar a utilizar o CardioIA.
+
+**Observação:** o aplicativo é distribuído por arquivo APK, fora da Google Play Store. Por isso, o Android poderá solicitar autorização para instalar aplicativos de fontes externas.
+
+## 6. Autenticação e variáveis de ambiente
+
+O Supabase é utilizado para autenticação dos usuários.
+
+### Aplicativo Mobile
+
+As seguintes variáveis são utilizadas:
+
+| Variável | Finalidade |
+|---|---|
+| `EXPO_PUBLIC_API_URL` | Endereço base da API |
+| `EXPO_PUBLIC_SUPABASE_URL` | Endereço do projeto Supabase |
+| `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Chave publicável do Supabase |
+
+### Backend
+
+| Variável | Finalidade |
+|---|---|
+| `SUPABASE_URL` | Endereço do projeto Supabase |
+| `SUPABASE_PUBLISHABLE_KEY` | Chave utilizada na validação da autenticação |
+| `PORT` | Porta de execução do servidor |
+
+As variáveis devem ser configuradas no ambiente de execução correspondente. Arquivos `.env` com valores locais não devem ser versionados.
+
+## 7. Histórico de análises
+
+Na aplicação Web, as análises são armazenadas localmente no navegador por meio do IndexedDB.
+
+No aplicativo Mobile, a tela de histórico consulta os registros da tabela `exams` no Supabase. O fluxo atual de análise Mobile, entretanto, não grava automaticamente o resultado nessa tabela. Portanto, os históricos Web e Mobile não são sincronizados nesta versão.
+
+## 8. Execução local
+
+### Backend
+
+Na raiz do repositório:
+
+```bash
+pip install -r requirements-backend.txt
+python scripts/app.py
+```
+
+Configure as variáveis de ambiente necessárias antes de iniciar o backend.
+
+### Frontend Web
+
+Em outro terminal:
+
+```bash
+cd web
+npm install
+npm run dev
+```
+
+Para gerar a versão de produção:
+
+```bash
+npm run build
+```
+
+### Aplicativo Mobile
+
+Em outro terminal:
+
+```bash
+cd mobile
+npm install
+npx expo start
+```
+
+Para gerar o APK Android, consulte o comando apresentado na seção de build.
+
+## 9. Segurança e limitações
+
+- As rotas protegidas da API validam o token de autenticação do Supabase.
+- Credenciais e arquivos `.env` não devem ser publicados no repositório.
+- A comunicação configurada entre a Vercel e o backend AWS utiliza HTTP, não HTTPS de ponta a ponta.
+- O histórico Web é local ao navegador; o histórico Mobile consulta o Supabase, sem gravação automática pelo fluxo atual de análise.
+- Os modelos e resultados apresentados fazem parte de um protótipo acadêmico, sem validação clínica para utilização diagnóstica.
+
+**Aviso:** o CardioIA é um projeto acadêmico e experimental. Seus resultados não substituem avaliação médica e não devem ser utilizados isoladamente para decisões clínicas.
+
+## 10. Demonstração da aplicação
+
+### Aplicação Web
+
+<img width="2940" height="1660" alt="image" src="https://github.com/user-attachments/assets/d5404080-b0b4-409f-9a38-9f3dc90e5583" />
+
+<img width="2940" height="1662" alt="image" src="https://github.com/user-attachments/assets/1622c705-e6ad-4385-bfb8-c4f33d36086c" />
+
+<img width="2430" height="1144" alt="image" src="https://github.com/user-attachments/assets/85ec2999-0d62-4cbc-ae56-6095f208ac31" />
+
+<img width="2940" height="1650" alt="image" src="https://github.com/user-attachments/assets/a3d59224-ab24-4885-9d0a-205e23ed19bd" />
+
+### Aplicativo Mobile
+
+<img width="738" height="1600" alt="image" src="https://github.com/user-attachments/assets/f4480661-0208-454f-a6c5-d20c8ca7d8e9" />
+
+<img width="738" height="1600" alt="image" src="https://github.com/user-attachments/assets/12e6e2dc-82f9-443d-8daa-197d04aa5696" />
+
+<img width="738" height="1600" alt="image" src="https://github.com/user-attachments/assets/18b32f0a-5ea6-4ffe-a823-f40f6b4cbfe6" />
+
+### Infraestrutura
+
+<img width="2940" height="1658" alt="image" src="https://github.com/user-attachments/assets/3ebe35a9-b2a7-4a41-9fc7-8459cda82abd" />
+
+<img width="2940" height="1430" alt="image" src="https://github.com/user-attachments/assets/f6e3f505-8f0e-47d9-bc06-edb83a2724ec" />
+
+<img width="2514" height="1478" alt="image" src="https://github.com/user-attachments/assets/55c268f3-f94d-4a8b-8c88-fab993016185" />
+
