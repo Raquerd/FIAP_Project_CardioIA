@@ -14,24 +14,73 @@ cls
 echo =======================================================
 echo          CARDIOIA - MENU PRINCIPAL
 echo =======================================================
-echo [1] Executar Sistema Multiagente no Terminal (Fase 6 - CLI)
-echo [2] Abrir Dashboard Web Interativo da Fase 6 (Navegador)
-echo [3] Executar Testes Automatizados do Multiagente (Fase 6)
-echo [4] Iniciar Chatbot Conversacional (Fase 5 - Flask ^& Web)
-echo [5] Executar Testes Automatizados da API (Fase 5)
-echo [6] Iniciar Prototipo de Diagnostico ECG (Fase 4 - Streamlit)
-echo [7] Sair
+echo [1] Iniciar Backend Integrador CardioIA (Fase 7 - Flask REST)
+echo [2] Executar Testes Automatizados de Integracao (Fase 7)
+echo [3] Executar Simulador IoT MicroPython (Fase 7)
+echo [4] Gerar Relatorio Tecnico em PDF (Fase 7 - 5 Paginas)
+echo [5] Executar Sistema Multiagente no Terminal (Fase 6 - CLI)
+echo [6] Abrir Dashboard Web Interativo da Fase 6 (Navegador)
+echo [7] Executar Testes Automatizados do Multiagente (Fase 6)
+echo [8] Iniciar Chatbot Conversacional (Fase 5 - Flask ^& Web)
+echo [9] Iniciar Prototipo de Diagnostico ECG (Fase 4 - Streamlit)
+echo [10] Sair
 echo =======================================================
-set /p OPT="Escolha uma opcao (1-7): "
+set /p OPT="Escolha uma opcao (1-10): "
 
-if "%OPT%"=="1" goto MULTIAGENTE
-if "%OPT%"=="2" goto DASHBOARD_FASE6
-if "%OPT%"=="3" goto TESTES_FASE6
-if "%OPT%"=="4" goto CHATBOT
-if "%OPT%"=="5" goto TESTES_FASE5
-if "%OPT%"=="6" goto STREAMLIT
-if "%OPT%"=="7" goto FIM
+if "%OPT%"=="1" goto BACKEND_FASE7
+if "%OPT%"=="2" goto TESTES_FASE7
+if "%OPT%"=="3" goto SIMULADOR_IOT
+if "%OPT%"=="4" goto RELATORIO_PDF_FASE7
+if "%OPT%"=="5" goto MULTIAGENTE
+if "%OPT%"=="6" goto DASHBOARD_FASE6
+if "%OPT%"=="7" goto TESTES_FASE6
+if "%OPT%"=="8" goto CHATBOT
+if "%OPT%"=="9" goto STREAMLIT
+if "%OPT%"=="10" goto FIM
 echo Opcao invalida! Tente novamente.
+pause
+cls
+goto MENU
+
+:BACKEND_FASE7
+cls
+echo =======================================================
+echo Iniciando Backend Integrador CardioIA (Fase 7)...
+echo Acesso: http://localhost:5000
+echo Telemetria: http://localhost:5000/api/telemetria/atual
+echo =======================================================
+start http://localhost:5000/api/status
+python backend/app.py
+pause
+cls
+goto MENU
+
+:TESTES_FASE7
+cls
+echo =======================================================
+echo Executando Bateria de Testes do Backend Integrador (Fase 7)...
+echo =======================================================
+python backend/test_integrador.py
+pause
+cls
+goto MENU
+
+:SIMULADOR_IOT
+cls
+echo =======================================================
+echo Executando Simulador IoT MicroPython (ESP32)...
+echo =======================================================
+python iot/simulador_iot.py --qtd 10 --intervalo 2
+pause
+cls
+goto MENU
+
+:RELATORIO_PDF_FASE7
+cls
+echo =======================================================
+echo Gerando Relatorio Tecnico Oficial da Fase 7 (PDF 5 Pags)...
+echo =======================================================
+python scripts/gerar_pdf_arquitetura_final_fase7.py
 pause
 cls
 goto MENU

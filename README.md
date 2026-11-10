@@ -17,14 +17,17 @@ Caique Nonato da Silva Bezerra
 
 # Organização do projeto
 
+* **backend:** Núcleo integrador da plataforma CardioIA em Python (`backend/app.py` e `backend/integrador_service.py`), unificando a ingestão de telemetria IoT com os motores de IA das Fases 4, 5 e 6, e suíte de testes de integração (`backend/test_integrador.py`).
+* **iot:** Firmware do microcontrolador ESP32 em MicroPython (`iot/main.py`), driver OLED (`iot/ssd1306.py`), diagrama de conexões do Wokwi (`iot/diagram.json`) e simulador de telemetria (`iot/simulador_iot.py`).
+* **web:** Aplicação Web moderna em React + Vite publicada na Vercel com CI/CD automático, rotas SPA (`web/vercel.json`), tela de análise de ECG e nova tela de Telemetria & Risco em tempo real.
 * **config:** Centraliza arquivos de configuração, mapeamento de sintomas (.csv), dicionários de regras, diagramas, os pesos dos modelos CNN salvos (`.pth`), a exportação do Watson Assistant (`watson_assistant_skill.json`), o modelo preditivo de risco cardíaco da Fase 6 (`modelo_risco_cardiaco.joblib`) e os protocolos clínicos de emergência (`protocolos_emergencia.json`).
-* **docs:** Reservada para a base de conhecimento textual e documentação técnica, incluindo relatórios do ESP32, Node-RED, Watson Assistant, Relatório do Modelo Preditivo da Fase 6 (`Relatorio_Modelo_Preditivo_Fase6.pdf` / `.rtf`) e Arquitetura Multiagente (`Arquitetura_Multiagente_Fase6.pdf`).
-* **scripts:** Contém os notebooks (.ipynb), script de treinamento CNN (`cardioia_treinamento_cnn.py`), protótipo Streamlit (`cardioia_prototype.py`), código C++ do ESP32 (`skecth_esp32.ino`), serviço do Watson (`watson_service.py`), backend Flask (`app.py`), sistema multiagente preditivo (`sistema_multiagente_fase6.py`) e suítes de testes (`test_watson_api.py` e `test_multiagente_fase6.py`).
-* **templates / static:** Interface web moderna de interação com o assistente conversacional.
+* **docs:** Reservada para a base de conhecimento textual e documentação técnica, incluindo relatórios do ESP32, Node-RED, Watson Assistant, Relatório da Fase 6 e o **Relatório Técnico Oficial da Arquitetura Final de 5 páginas** (`docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf`).
+* **scripts:** Contém os notebooks (.ipynb), script de treinamento CNN (`cardioia_treinamento_cnn.py`), protótipo Streamlit (`cardioia_prototype.py`), código C++ do ESP32 (`skecth_esp32.ino`), serviço do Watson (`watson_service.py`), backend Flask (`app.py`), sistema multiagente preditivo (`sistema_multiagente_fase6.py`), geradores de PDFs e suítes de testes.
+* **templates / static:** Interface web interativa e dashboards em tempo real.
 * **temp:** Diretório destinado a arquivos gerados durante a execução, logs de processamento e tabelas de testes temporárias.
 * **assets:** Armazena os ativos do projeto, dados cardiologia (`heart.csv`), base sintética de 5.000 casos (`base_sintetica_risco_fase6.csv`), exames de ECG e imagens de dashboards.
-* **requirements.txt:** Listagem de todas as bibliotecas Python necessárias para execução do ecossistema.
-* **main.bat:** Script inicializador automatizado interativo para Windows com menu de opções para as Fases 4, 5 e 6.
+* **requirements.txt / requirements-backend.txt:** Listagem de todas as bibliotecas Python necessárias para execução do ecossistema.
+* **main.bat:** Script inicializador automatizado interativo para Windows com menu de opções para as Fases 4, 5, 6 e 7.
 
 ---  
 
@@ -412,10 +415,12 @@ Nesta etapa, o CardioIA foi ampliado com uma aplicação Web e um aplicativo Mob
 
 ## 2. Links para avaliação
 
-- **Aplicação Web publicada:** https://fiap-project-cardio-ia-delta.vercel.app
-- **Aplicativo Android (APK):** [[Baixar CardioIA](https://expo.dev/artifacts/eas/5-zVREEnJZ6c7p0Ryhjkn65hlqBnIuC4IfWS9qX_5JI.apk)](https://expo.dev/accounts/laykura/projects/cardioia-mobile/builds/c17470c5-3da4-40c6-aa25-ef0d2f3db23c)
+- **Aplicação Web publicada (Vercel SPA com CI/CD ativo):** https://fiap-project-cardio-ia-delta.vercel.app
+- **Aplicativo Android (APK via EAS Build):** [[Baixar CardioIA](https://expo.dev/artifacts/eas/5-zVREEnJZ6c7p0Ryhjkn65hlqBnIuC4IfWS9qX_5JI.apk)](https://expo.dev/accounts/laykura/projects/cardioia-mobile/builds/c17470c5-3da4-40c6-aa25-ef0d2f3db23c)
   <img width="612" height="568" alt="image" src="https://github.com/user-attachments/assets/98f597c5-0cad-423b-8cf1-ea5df125deea" />
 - **Projeto Mobile no Expo:** https://expo.dev/accounts/laykura/projects/cardioia-mobile
+- **Simulação de Hardware IoT em MicroPython (Wokwi):** https://wokwi.com/projects/463793755500080129
+- **Relatório Técnico Oficial da Arquitetura Final (PDF de 5 Páginas):** [`docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf`](./docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf) (ou na raiz: [`Relatorio_Integracao_Arquitetura_Final_Fase7.pdf`](./Relatorio_Integracao_Arquitetura_Final_Fase7.pdf))
 
 ## 3. Aplicação Web
 
@@ -445,8 +450,14 @@ Entre as rotas disponibilizadas estão:
 
 | Método | Rota | Finalidade |
 |---|---|---|
-| GET | `/api/status` | Verificar a disponibilidade da API |
-| POST | `/api/ecg/analisar` | Receber a imagem e executar a análise do ECG |
+| GET | `/api/status` | Verificar a disponibilidade da API e diagnóstico de todos os módulos |
+| POST | `/api/telemetria` | Receber sinais vitais do ESP32 MicroPython e acionar inferência preditiva de risco |
+| GET | `/api/telemetria/atual` | Retornar o último sinal vital registrado para os cards da interface |
+| GET | `/api/telemetria/historico` | Retornar as últimas leituras de telemetria para gráficos de tendência |
+| POST | `/api/predicao/risco` | Avaliar risco cardiovascular em tempo real com Random Forest (Fase 6) |
+| POST | `/api/ecg/analisar` | Receber a imagem e executar a análise do ECG com CNN ou ResNet50 |
+| POST | `/api/message` | Processar mensagens conversacionais com o Watson Assistant (Fase 5) |
+| GET | `/api/integracao/resumo` | Resumo técnico em tempo real dos 4 pilares do ecossistema integrado |
 
 A rota de análise exige autenticação por token Bearer do Supabase, recebe a imagem por multipart/form-data e permite selecionar o modelo `cnn` ou `resnet50`.
 
@@ -611,4 +622,56 @@ Para gerar o APK Android, consulte o comando apresentado na seção de build.
 <img width="2940" height="1430" alt="image" src="https://github.com/user-attachments/assets/f6e3f505-8f0e-47d9-bc06-edb83a2724ec" />
 
 <img width="2514" height="1478" alt="image" src="https://github.com/user-attachments/assets/55c268f3-f94d-4a8b-8c88-fab993016185" />
+
+---
+
+## 🚀 11. Fase 7 - Parte 2: Integração do Ecossistema, MicroPython & Arquitetura Final
+
+Desenvolvido por **Davi Santos Ferreira** como parte da entrega final do MVP integrado do CardioIA.
+
+### 🔌 1. Transição de Hardware para MicroPython (ESP32 no Wokwi)
+- **Migração de Firmware:** A lógica anterior em C/C++ foi convertida integralmente para **MicroPython** no arquivo [`iot/main.py`](./iot/main.py) com o driver [`iot/ssd1306.py`](./iot/ssd1306.py).
+- **Sensoriamento Clínico:**
+  - **Frequência Cardíaca (BPM):** Leitura do ADC no pino `GPIO 34` (potenciômetro) mapeado linearmente para o intervalo fisiológico de **40 a 200 BPM**.
+  - **Temperatura e Umidade:** Leitura digital via sensor **DHT22** no pino `GPIO 15`.
+- **Feedback Visual Local (Duplo):**
+  - **Display OLED SSD1306 (I2C SDA=21, SCL=22):** Resolução 128x64 exibindo BPM, Temperatura, Status Clínico (`ESTAVEL`, `ATENCAO` ou `! ALERTA !`) e status da rede/buffer.
+  - **LED Vermelho de Alerta (GPIO 2):** Acionamento físico em tempo de máquina (<5ms) caso BPM > 120 ou Temp > 38,0 °C.
+- **Edge Computing & Resiliência Offline:**
+  - Buffer circular local em RAM com retenção de até **20 medições** caso o Wi-Fi ou Broker MQTT oscilem.
+  - Sincronização automática em lote assim que a conexão é restabelecida (`sincronizar_buffer()`).
+- **Simulação Online no Wokwi:** [Link do Projeto MicroPython no Wokwi](https://wokwi.com/projects/463793755500080129).
+
+### 🧠 2. Núcleo Integrador Backend em Python (`backend/`)
+- Serviço central implementado em [`backend/app.py`](./backend/app.py) e [`backend/integrador_service.py`](./backend/integrador_service.py) que unifica:
+  - **Telemetria de Sensores:** Recebe pacotes do MicroPython (`POST /api/telemetria`) e mantém histórico em memória.
+  - **Motor Preditivo da Fase 6:** Inferência instantânea com o modelo Random Forest (`config/modelo_risco_cardiaco.joblib`), calculando probabilidade e pico de risco.
+  - **Protocolos de Emergência:** Avaliação automática das 10 diretrizes clínicas de [`config/protocolos_emergencia.json`](./config/protocolos_emergencia.json) disparadas conforme os sinais vitais.
+  - **Visão Computacional da Fase 4:** Classificação de imagens de ECG com CNN e ResNet50 (`POST /api/ecg/analisar`).
+  - **Assistente Conversacional da Fase 5:** Gerenciamento de sessões e chat com o Watson Assistant (`POST /api/message`).
+
+### 📊 3. Nova Tela de Telemetria & Risco na Aplicação Web
+- Adicionada aba **"Telemetria & Risco"** no menu principal da aplicação Web (React + Vite), contendo:
+  - Cards em tempo real com indicador de pulso para Frequência Cardíaca (BPM), Temperatura Corporal (°C) e Status do ESP32.
+  - Painel com o Score de Risco do Random Forest e lista de Protocolos de Emergência acionados.
+  - Barra de ferramentas para simulação rápida de cenários clínicos (Estável, Taquicardia/Crise e Bradicardia).
+  - Tabela com o histórico das últimas leituras recebidas do sensor.
+
+### 🧪 4. Testes Automatizados de Integração
+Bateria de 7 testes de integração desenvolvida em [`backend/test_integrador.py`](./backend/test_integrador.py) com **100% de aprovação**:
+```bash
+python backend/test_integrador.py
+```
+- `test_01_health_check_status`: Verificação de saúde de todos os módulos [OK]
+- `test_02_recebimento_telemetria_micropython_normal`: Ingestão estável (BPM 76) [OK]
+- `test_03_recebimento_telemetria_micropython_alerta_critico`: Alerta crítico (BPM 138) [OK]
+- `test_04_consulta_ultimo_sinal_iot`: Consulta do último sinal vital [OK]
+- `test_05_consulta_historico_iot`: Histórico para gráficos de tendência [OK]
+- `test_06_predicao_risco_personalizada`: Inferência com o Random Forest da Fase 6 [OK]
+- `test_07_resumo_integracao_completa`: Diagnóstico holístico da plataforma integrada [OK]
+
+### 📑 5. Relatório Técnico Oficial da Arquitetura Final (PDF de 5 Páginas)
+O documento técnico exigido pela FIAP detalhando o fluxo `Sensor -> MicroPython -> Backend Python -> APIs de IA -> UI` está disponível em:
+- **[`docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf`](./docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf)** *(e na raiz do projeto: [`Relatorio_Integracao_Arquitetura_Final_Fase7.pdf`](./Relatorio_Integracao_Arquitetura_Final_Fase7.pdf))*.
+
 

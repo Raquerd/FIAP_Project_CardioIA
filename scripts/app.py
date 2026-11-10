@@ -10,7 +10,15 @@ load_dotenv()
 
 # Configurar caminhos para importar módulos locais
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+BACKEND_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'backend')
+if BACKEND_PATH not in sys.path:
+    sys.path.insert(0, BACKEND_PATH)
+
 from watson_service import WatsonAssistantService
+try:
+    from integrador_service import integrador
+except Exception as e:
+    integrador = None
 
 # Inicializar logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - [%(levelname)s] - %(message)s')
@@ -59,14 +67,78 @@ def index():
 @app.route('/api/status', methods=['GET'])
 def get_status():
     """
-    Endpoint de Health Check para verificar a saúde da API e status da conexão com Watson.
+    Endpoint de Health Check para verificar a saúde da API e status da conexão com Watson e Motores de IA.
     """
+    detalhes = integrador.obter_status_geral() if integrador else {}
     return jsonify({
         "status": "online",
-        "service": "CardioIA Conversational API",
+        "service": "CardioIA Integrated API",
         "watson_connected": watson_service is not None,
-        "api_version": "v2"
+        "api_version": "v7.0",
+        "iot_conectado": detalhes.get("modulos", {}).get("iot_micropython", {}).get("dispositivo_conectado", False),
+        "modelo_risco_carregado": detalhes.get("modulos", {}).get("ia_preditiva_fase6", {}).get("modelo_carregado", False),
+        "detalhes": detalhes
     }), 200
+
+
+@app.route('/api/telemetria', methods=['POST'])
+@app.route('/api/sensores', methods=['POST'])
+def registrar_telemetria():
+    """Recebe sinais vitais do ESP32 MicroPython."""
+    if not integrador:
+        return jsonify({"erro": "Servico integrador indisponivel"}), 503
+    dados = request.get_json(silent=True)
+    if not dados:
+        return jsonify({"erro": "JSON ausente"}), 400
+    try:
+        res = integrador.registrar_telemetria_iot(dados)
+        return jsonify({"status": "sucesso", "registro": res}), 201
+    except Exception as e:
+        return jsonify({"erro": str(e)}), 500
+
+
+@app.route('/api/telemetria/atual', methods=['GET'])
+def get_telemetria_atual():
+    """Retorna o último sinal vital registrado."""
+    if not integrador:
+        return jsonify({"erro": "Servico integrador indisponivel"}), 503
+    return jsonify(integrador.obter_ultimo_sinal()), 200
+
+
+@app.route('/api/telemetria/historico', methods=['GET'])
+def get_telemetria_historico():
+    """Retorna histórico de leituras de telemetria."""
+    if not integrador:
+        return jsonify({"total": 0, "leituras": []}), 200
+    limite = int(request.args.get('limite', 20))
+    return jsonify({"total": len(integrador.obter_historico_iot(limite)), "leituras": integrador.obter_historico_iot(limite)}), 200
+
+
+@app.route('/api/predicao/risco', methods=['POST'])
+def avaliar_risco_preditivo():
+    """Avalia o risco de crise cardiovascular a partir de sinais vitais."""
+    if not integrador:
+        return jsonify({"erro": "Servico integrador indisponivel"}), 503
+    dados = request.get_json(silent=True) or {}
+    bpm = dados.get('bpm')
+    temp = dados.get('temperatura')
+    if bpm is None or temp is None:
+        ultimo = integrador.obter_ultimo_sinal()
+        bpm = bpm if bpm is not None else ultimo.get('bpm', 75)
+        temp = temp if temp is not None else ultimo.get('temperatura', 36.5)
+    try:
+        resultado = integrador.avaliar_risco_sinais_vitais(bpm=int(bpm), temp=float(temp), **dados)
+        return jsonify(resultado), 200
+    except Exception as e:
+        return jsonify({"erro": str(e)}), 500
+
+
+@app.route('/api/integracao/resumo', methods=['GET'])
+def get_integracao_resumo():
+    """Resumo técnico em tempo real de todo o ecossistema integrado."""
+    if not integrador:
+        return jsonify({"erro": "Servico integrador indisponivel"}), 503
+    return jsonify(integrador.obter_status_geral()), 200
 
 
 @app.route('/api/ecg/analisar', methods=['POST'])
