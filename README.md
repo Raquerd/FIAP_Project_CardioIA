@@ -415,6 +415,7 @@ Nesta etapa, o CardioIA foi ampliado com uma aplicação Web e um aplicativo Mob
 
 ## 2. Links para avaliação
 
+- **Vídeo de Demonstração da Fase 7 (YouTube):** https://youtu.be/BRGNv5NzkT0
 - **Aplicação Web publicada (Vercel SPA com CI/CD ativo):** https://fiap-project-cardio-ia-delta.vercel.app
 - **Aplicativo Android (APK via EAS Build):** [[Baixar CardioIA](https://expo.dev/artifacts/eas/5-zVREEnJZ6c7p0Ryhjkn65hlqBnIuC4IfWS9qX_5JI.apk)](https://expo.dev/accounts/laykura/projects/cardioia-mobile/builds/c17470c5-3da4-40c6-aa25-ef0d2f3db23c)
   <img width="612" height="568" alt="image" src="https://github.com/user-attachments/assets/98f597c5-0cad-423b-8cf1-ea5df125deea" />
@@ -737,5 +738,9 @@ python backend/test_integrador.py
 ### 📑 6. Relatório Técnico Oficial da Arquitetura Final (PDF de 5 Páginas)
 O documento técnico exigido pela FIAP detalhando o fluxo `Sensor -> MicroPython -> Backend Python -> APIs de IA -> UI` está disponível em:
 - **[`docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf`](./docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf)** *(e na raiz do projeto: [`Relatorio_Integracao_Arquitetura_Final_Fase7.pdf`](./Relatorio_Integracao_Arquitetura_Final_Fase7.pdf))*.
+
+### 📹 7. Vídeo de Demonstração (Fase 7)
+- **Link do Vídeo no YouTube:** **[FIAP - Cardio IA - Fase 7 (https://youtu.be/BRGNv5NzkT0)](https://youtu.be/BRGNv5NzkT0)**
+
 
 

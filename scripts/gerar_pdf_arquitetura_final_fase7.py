@@ -504,8 +504,8 @@ def gerar_relatorio_tecnico():
     pdf.set_font("Helvetica", "", 8.8)
     pdf.set_text_color(30, 41, 59)
     txt_video = (
-        "O vídeo demonstrativo comprova a integração real do ecossistema fim-a-fim, seguindo o roteiro técnico "
-        "planejado de até 5 minutos com visualização das ferramentas e interfaces ativas em produção:"
+        "O vídeo demonstrativo comprova a integração real do ecossistema fim-a-fim, disponível em "
+        "https://youtu.be/BRGNv5NzkT0 (YouTube), seguindo o roteiro técnico planejado de 5 minutos:"
     )
     pdf.multi_cell(0, 4.3, _latin1(txt_video), new_x="LMARGIN", new_y="NEXT")
 
