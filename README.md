@@ -419,7 +419,7 @@ Nesta etapa, o CardioIA foi ampliado com uma aplicação Web e um aplicativo Mob
 - **Aplicativo Android (APK via EAS Build):** [[Baixar CardioIA](https://expo.dev/artifacts/eas/5-zVREEnJZ6c7p0Ryhjkn65hlqBnIuC4IfWS9qX_5JI.apk)](https://expo.dev/accounts/laykura/projects/cardioia-mobile/builds/c17470c5-3da4-40c6-aa25-ef0d2f3db23c)
   <img width="612" height="568" alt="image" src="https://github.com/user-attachments/assets/98f597c5-0cad-423b-8cf1-ea5df125deea" />
 - **Projeto Mobile no Expo:** https://expo.dev/accounts/laykura/projects/cardioia-mobile
-- **Simulação de Hardware IoT em MicroPython (Wokwi):** https://wokwi.com/projects/463793755500080129
+- **Simulação de Hardware IoT em MicroPython (Wokwi):** https://wokwi.com/projects/480358266952735745
 - **Relatório Técnico Oficial da Arquitetura Final (PDF de 5 Páginas):** [`docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf`](./docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf) (ou na raiz: [`Relatorio_Integracao_Arquitetura_Final_Fase7.pdf`](./Relatorio_Integracao_Arquitetura_Final_Fase7.pdf))
 
 ## 3. Aplicação Web
@@ -640,7 +640,7 @@ Desenvolvido por **Davi Santos Ferreira** como parte da entrega final do MVP int
 - **Edge Computing & Resiliência Offline:**
   - Buffer circular local em RAM com retenção de até **20 medições** caso o Wi-Fi ou Broker MQTT oscilem.
   - Sincronização automática em lote assim que a conexão é restabelecida (`sincronizar_buffer()`).
-- **Simulação Online no Wokwi:** [Link do Projeto MicroPython no Wokwi](https://wokwi.com/projects/463793755500080129).
+- **Simulação Online no Wokwi:** [Link do Projeto MicroPython no Wokwi](https://wokwi.com/projects/480358266952735745).
 
 ### 🧠 2. Núcleo Integrador Backend em Python (`backend/`)
 - Serviço central implementado em [`backend/app.py`](./backend/app.py) e [`backend/integrador_service.py`](./backend/integrador_service.py) que unifica:

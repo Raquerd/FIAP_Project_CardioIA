@@ -500,7 +500,7 @@ function App() {
                     Simular Bradicardia (44 BPM / 36.2°C)
                   </button>
                   <a
-                    href="https://wokwi.com/projects/463793755500080129"
+                    href="https://wokwi.com/projects/480358266952735745"
                     target="_blank"
                     rel="noreferrer"
                     className="btn-sim btn-sim-wokwi"

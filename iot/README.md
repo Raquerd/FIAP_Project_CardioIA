@@ -39,7 +39,7 @@ Este diretório contém a evolução da camada de sensoriamento e computação d
 ## 🌐 Como Executar a Simulação no Wokwi
 
 ### Link do Projeto no Wokwi:
-🔗 **[Simulação MicroPython CardioIA no Wokwi](https://wokwi.com/projects/463793755500080129)**
+🔗 **[Simulação MicroPython CardioIA no Wokwi](https://wokwi.com/projects/480358266952735745)**
 
 ### Passo a Passo para Criar ou Rodar a Simulação:
 1. Acesse o [Wokwi ESP32 MicroPython](https://wokwi.com/projects/new/micropython-esp32).

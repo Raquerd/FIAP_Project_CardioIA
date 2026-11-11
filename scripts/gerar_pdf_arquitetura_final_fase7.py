@@ -128,7 +128,7 @@ def gerar_relatorio_tecnico():
     desenhar_card_link(
         pdf, 93,
         "3. Simulação de Hardware IoT em MicroPython (Ambiente Wokwi ESP32):",
-        "https://wokwi.com/projects/463793755500080129",
+        "https://wokwi.com/projects/480358266952735745",
         (245, 158, 11), (254, 243, 199), (180, 83, 9)
     )
     desenhar_card_link(
