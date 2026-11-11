@@ -97,13 +97,16 @@ def get_integracao_resumo():
 # ==============================================================================
 # ROTAS DE TELEMETRIA IOT (MICROPYTHON / WOKWI)
 # ==============================================================================
-@app.route('/api/telemetria', methods=['POST'])
-@app.route('/api/sensores', methods=['POST'])
+@app.route('/api/telemetria', methods=['GET', 'POST'])
+@app.route('/api/sensores', methods=['GET', 'POST'])
 def registrar_telemetria():
     """
-    Recebe os sinais vitais coletados pelo ESP32 com MicroPython
-    e aciona automaticamente a inferência preditiva de risco.
+    POST: Recebe os sinais vitais coletados pelo ESP32 com MicroPython.
+    GET:  Retorna o último sinal vital capturado (para visualização no navegador).
     """
+    if request.method == 'GET':
+        return jsonify(integrador.obter_ultimo_sinal()), 200
+
     dados = request.get_json(silent=True)
     if not dados:
         return jsonify({"erro": "Payload JSON ausente ou mal formatado."}), 400

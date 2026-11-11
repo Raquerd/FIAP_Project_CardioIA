@@ -84,12 +84,14 @@ def get_status():
     }), 200
 
 
-@app.route('/api/telemetria', methods=['POST'])
-@app.route('/api/sensores', methods=['POST'])
+@app.route('/api/telemetria', methods=['GET', 'POST'])
+@app.route('/api/sensores', methods=['GET', 'POST'])
 def registrar_telemetria():
-    """Recebe sinais vitais do ESP32 MicroPython."""
+    """Recebe sinais vitais do ESP32 MicroPython (POST) ou retorna o último sinal (GET)."""
     if not integrador:
         return jsonify({"erro": "Servico integrador indisponivel"}), 503
+    if request.method == 'GET':
+        return jsonify(integrador.obter_ultimo_sinal()), 200
     dados = request.get_json(silent=True)
     if not dados:
         return jsonify({"erro": "JSON ausente"}), 400
