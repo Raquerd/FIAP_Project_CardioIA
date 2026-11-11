@@ -1,0 +1,57 @@
+=====================================================================
+FIAP - 2TIAOA - FASE 7: DA CONSTRUÇÃO DE MÓDULOS À SOLUÇÃO INTEGRADA
+PROJETO CARDIOIA - MVP FINAL INTEGRADO
+=====================================================================
+
+INTEGRANTES DO GRUPO:
+- Davi Santos Ferreira
+- Lais Kurahashi
+
+---------------------------------------------------------------------
+1. LINKS OFICIAIS DA ENTREGA (CLICÁVEIS)
+---------------------------------------------------------------------
+1. Vídeo de Demonstração da Solução (YouTube - Não Listado):
+https://youtu.be/BRGNv5NzkT0
+
+2. Aplicação Web Publicada (Vercel SPA com CI/CD ativo):
+https://fiap-project-cardio-ia-delta.vercel.app
+
+3. Aplicativo Mobile Android (Download do .APK via Expo EAS Build):
+https://expo.dev/artifacts/eas/5-zVREEnJZ6c7p0Ryhjkn65hlqBnIuC4IfWS9qX_5JI.apk
+
+4. Simulação de Hardware IoT em MicroPython (Ambiente Wokwi ESP32):
+https://wokwi.com/projects/480358266952735745
+
+5. Repositório Oficial no GitHub (Código-Fonte Integrado e Documentos):
+https://github.com/Raquerd/FIAP_Project_CardioIA
+
+---------------------------------------------------------------------
+2. RESUMO DO DESENVOLVIMENTO REALIZADO NA FASE 7
+---------------------------------------------------------------------
+- Parte 1 (Lais Kurahashi):
+  * Deploy Web na Vercel com roteamento SPA (web/vercel.json) e CI/CD automático via GitHub.
+  * Backend em Python/Flask hospedado na AWS Elastic Beanstalk (cardioia-env).
+  * Aplicativo Mobile Android desenvolvido em React Native e Expo com geração de APK via EAS Build.
+  * Autenticação e persistência de usuários gerenciadas via Supabase.
+
+- Parte 2 (Davi Santos Ferreira):
+  * Transição de firmware para MicroPython no ESP32 (iot/main.py, iot/ssd1306.py e iot/diagram.json) com DHT22, ADC 40-200 BPM, OLED I2C, LED de alerta e buffer circular de resiliência offline (20 medições) no Wokwi.
+  * Backend Integrador em Python (backend/app.py e backend/integrador_service.py) unificando telemetria IoT, predição de risco da Fase 6 (Random Forest), 10 protocolos de emergência, inferência CNN de ECG da Fase 4 e Watson Assistant da Fase 5.
+  * Interface Hub Web Local (templates/fase7_hub.html) e nova tela de Telemetria & Risco na aplicação React da Vercel.
+  * Suíte de Testes Automatizados de Integração (backend/test_integrador.py) com 7 testes aprovados (100%).
+  * Relatório Técnico Oficial da Arquitetura Final de 5 páginas (docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf).
+  * Script inicializador automatizado interativo (main.bat) com inicialização em 1 clique.
+
+---------------------------------------------------------------------
+3. LOCALIZAÇÃO DOS PRINCIPAIS ENTREGÁVEIS NO REPOSITÓRIO
+---------------------------------------------------------------------
+docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf -> Relatório Técnico da Arquitetura (5 págs)
+iot/main.py & iot/ssd1306.py                         -> Firmware ESP32 MicroPython e OLED I2C
+iot/diagram.json & iot/simulador_iot.py              -> Esquema Wokwi e Simulador IoT Resiliente
+backend/app.py & backend/integrador_service.py       -> Backend Integrador e Orquestrador de IA
+backend/test_integrador.py                           -> Bateria de 7 Testes de Integração
+templates/fase7_hub.html                             -> Hub Web Local de Telemetria e Simulação
+web/src/App.jsx & web/vercel.json                    -> Frontend Web React SPA (Vercel CI/CD)
+mobile/app.json & mobile/eas.json                    -> App Mobile React Native / Expo EAS
+main.bat                                             -> Menu e Inicializador Rápido Automatizado
+=====================================================================
