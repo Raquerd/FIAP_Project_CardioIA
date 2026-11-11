@@ -546,18 +546,61 @@ No aplicativo Mobile, a tela de histórico consulta os registros da tabela `exam
 
 ## 8. Execução local
 
-### Backend
+### ⚡ Inicialização Rápida e Automatizada (`main.bat`)
+
+Para facilitar a execução de todo o ecossistema integrado em ambiente Windows, utilize o inicializador interativo na raiz do repositório:
+
+```powershell
+.\main.bat
+```
+
+O menu disponibiliza atalhos rápidos para todos os módulos do projeto:
+- **`[0] Iniciar Solução Completa (Recomendado)`:** Inicializa o Backend Integrador em janela dedicada, abre o Hub Web no navegador (`http://localhost:5000`) e dispara a simulação de telemetria IoT automaticamente com 1 clique.
+- **`[1] Iniciar Backend Integrador (Fase 7)`:** Inicializa o servidor Flask unificado em segundo plano sem travar o terminal.
+- **`[2] Executar Testes Automatizados de Integração (Fase 7)`:** Executa os 7 testes de integração do ecossistema (`backend/test_integrador.py`).
+- **`[3] Executar Simulador IoT MicroPython (Fase 7)`:** Transmite pacotes de telemetria simulando o ESP32 (com auto-detecção do backend).
+- **`[4] Gerar Relatório Técnico em PDF (5 Páginas)`:** Compila o relatório oficial da arquitetura da Fase 7 via ReportLab.
+- **`[5] Abrir Hub Web da Solução`:** Abre `http://localhost:5000` diretamente no navegador padrão.
+- **`[6] Executar Sistema Multiagente (Fase 6)`:** Inicia a orquestração multiagente da Fase 6 no terminal.
+- **`[7] Abrir Dashboard Web da Fase 6`:** Abre o painel HTML interativo de simulação multiagente.
+- **`[8] Executar Testes do Multiagente (Fase 6)`:** Executa os testes automatizados da Fase 6.
+- **`[9] Iniciar Chatbot Conversacional (Fase 5)`:** Inicia o assistente cardiológico integrado ao Watson.
+- **`[10] Iniciar Protótipo Streamlit de ECG (Fase 4)`:** Executa o visualizador de exames e inferência CNN.
+
+---
+
+### Execução Manual por Componente
+
+#### 1. Backend Integrador e Hub Web Local
 
 Na raiz do repositório:
 
 ```bash
-pip install -r requirements-backend.txt
-python scripts/app.py
+pip install -r requirements.txt
+python backend/app.py
 ```
 
-Configure as variáveis de ambiente necessárias antes de iniciar o backend.
+O backend integrado estará disponível em:
+- **Hub Web Interativo:** `http://localhost:5000`
+- **Health Check & Diagnóstico:** `http://localhost:5000/api/status`
+- **Telemetria Atual (JSON):** `http://localhost:5000/api/telemetria`
+- **Resumo da Integração:** `http://localhost:5000/api/integracao/resumo`
 
-### Frontend Web
+#### 2. Simulador IoT MicroPython (Resiliente)
+
+Para injetar sinais vitais no backend sem necessidade da placa física:
+
+```bash
+# Envio padrão de 10 pacotes com intervalo de 2s (cenário aleatório)
+python iot/simulador_iot.py
+
+# Cenários específicos (estavel, taquicardia, bradicardia, febre)
+python iot/simulador_iot.py --cenario taquicardia --qtd 5 --intervalo 1
+```
+
+*Nota: O simulador verifica automaticamente se o backend local em `http://localhost:5000` está ativo. Caso esteja desligado, ele inicializa o processo do backend em segundo plano de forma autônoma. Se a execução local não estiver disponível, faz fallback transparente para a nuvem AWS.*
+
+#### 3. Frontend Web (React + Vite)
 
 Em outro terminal:
 
@@ -567,13 +610,13 @@ npm install
 npm run dev
 ```
 
-Para gerar a versão de produção:
+Acesse em `http://localhost:5173`. Para compilar o build de produção:
 
 ```bash
 npm run build
 ```
 
-### Aplicativo Mobile
+#### 4. Aplicativo Mobile (React Native + Expo)
 
 Em outro terminal:
 
@@ -596,6 +639,22 @@ Para gerar o APK Android, consulte o comando apresentado na seção de build.
 **Aviso:** o CardioIA é um projeto acadêmico e experimental. Seus resultados não substituem avaliação médica e não devem ser utilizados isoladamente para decisões clínicas.
 
 ## 10. Demonstração da aplicação
+
+### Hardware IoT e Simulação no Wokwi (ESP32 MicroPython)
+
+A simulação completa do hardware hospitalar com microcontrolador ESP32 rodando MicroPython foi homologada no simulador Wokwi, conectando sensores de sinais vitais, display OLED I2C de telemetria e sinalização física de emergência:
+
+* **Cenário 1: Monitoramento Estável (BPM normal e sem alertas):**
+  O display OLED exibe `STATUS: ESTAVEL`, batimentos dentro da faixa fisiológica normal e o LED de alerta permanece desligado.
+
+  ![ESP32 em Monitoramento Estável](./assets/IOT_testes/ESP32-Estavel.png)
+
+* **Cenário 2: Detecção de Risco Crítico / Taquicardia (BPM > 120):**
+  O firmware em MicroPython detecta anomalia em tempo de máquina (<5ms), aciona o LED vermelho de emergência no pino GPIO 2 e atualiza o display OLED para `STATUS: ! ALERTA !`.
+
+  ![ESP32 em Alerta Crítico](./assets/IOT_testes/ESP32-Risco_critico.png)
+
+🔗 **Acesse o simulador ao vivo:** [Simulação ESP32 MicroPython no Wokwi](https://wokwi.com/projects/480358266952735745)
 
 ### Aplicação Web
 
@@ -650,14 +709,19 @@ Desenvolvido por **Davi Santos Ferreira** como parte da entrega final do MVP int
   - **Visão Computacional da Fase 4:** Classificação de imagens de ECG com CNN e ResNet50 (`POST /api/ecg/analisar`).
   - **Assistente Conversacional da Fase 5:** Gerenciamento de sessões e chat com o Watson Assistant (`POST /api/message`).
 
-### 📊 3. Nova Tela de Telemetria & Risco na Aplicação Web
+### 🖥️ 3. Hub Web Local (`templates/fase7_hub.html`) vs Aplicação Web Cloud (`web/`)
+O ecossistema dispõe de duas interfaces web complementares com propósitos bem definidos:
+- **Aplicação Web em Produção (Vercel):** Aplicação SPA em React + Vite voltada para o corpo clínico e pacientes. Foco em triagem, autenticação Supabase, laudos de ECG por visão computacional e visualização gráfica de telemetria.
+- **Hub Web Local (`http://localhost:5000`):** Painel de controle operacional e sala de comando integrada ao backend Flask. Exibe medidores em tempo real dos sinais vitais, monitora os protocolos hospitalares disparados pela telemetria, permite disparar injeções de teste e inspeciona a integridade das conexões e modelos de IA.
+
+### 📊 4. Nova Tela de Telemetria & Risco na Aplicação Web
 - Adicionada aba **"Telemetria & Risco"** no menu principal da aplicação Web (React + Vite), contendo:
   - Cards em tempo real com indicador de pulso para Frequência Cardíaca (BPM), Temperatura Corporal (°C) e Status do ESP32.
   - Painel com o Score de Risco do Random Forest e lista de Protocolos de Emergência acionados.
   - Barra de ferramentas para simulação rápida de cenários clínicos (Estável, Taquicardia/Crise e Bradicardia).
   - Tabela com o histórico das últimas leituras recebidas do sensor.
 
-### 🧪 4. Testes Automatizados de Integração
+### 🧪 5. Testes Automatizados de Integração
 Bateria de 7 testes de integração desenvolvida em [`backend/test_integrador.py`](./backend/test_integrador.py) com **100% de aprovação**:
 ```bash
 python backend/test_integrador.py
@@ -670,7 +734,7 @@ python backend/test_integrador.py
 - `test_06_predicao_risco_personalizada`: Inferência com o Random Forest da Fase 6 [OK]
 - `test_07_resumo_integracao_completa`: Diagnóstico holístico da plataforma integrada [OK]
 
-### 📑 5. Relatório Técnico Oficial da Arquitetura Final (PDF de 5 Páginas)
+### 📑 6. Relatório Técnico Oficial da Arquitetura Final (PDF de 5 Páginas)
 O documento técnico exigido pela FIAP detalhando o fluxo `Sensor -> MicroPython -> Backend Python -> APIs de IA -> UI` está disponível em:
 - **[`docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf`](./docs/Relatorio_Integracao_Arquitetura_Final_Fase7.pdf)** *(e na raiz do projeto: [`Relatorio_Integracao_Arquitetura_Final_Fase7.pdf`](./Relatorio_Integracao_Arquitetura_Final_Fase7.pdf))*.
 
