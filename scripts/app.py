@@ -48,11 +48,14 @@ except Exception as e:
 
 
 @app.route('/')
+@app.route('/fase7')
 def index():
     """
-    Renderiza a interface web do chat caso o template exista,
-    ou retorna o status da API em JSON.
+    Renderiza o Hub Integrador da Fase 7 ou o chat da Fase 5.
     """
+    fase7_html = os.path.join(TEMPLATES_DIR, 'fase7_hub.html')
+    if os.path.exists(fase7_html):
+        return render_template('fase7_hub.html')
     index_html = os.path.join(TEMPLATES_DIR, 'index.html')
     if os.path.exists(index_html):
         return render_template('index.html')

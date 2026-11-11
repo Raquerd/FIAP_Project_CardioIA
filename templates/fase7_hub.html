@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioIA - Hub Integrador da Solução (Fase 7)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg-page: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header.header {
+            background: #0f172a;
+            color: #ffffff;
+            padding: 24px 32px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.2);
+        }
+
+        .header-title h1 {
+            font-size: 24px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-title p {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .badge-live {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.4);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: #34d399;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.8; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-link {
+            text-decoration: none;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-link-blue { background: #2563eb; color: #fff; }
+        .btn-link-blue:hover { background: #1d4ed8; }
+        .btn-link-green { background: #059669; color: #fff; }
+        .btn-link-green:hover { background: #047857; }
+        .btn-link-amber { background: #d97706; color: #fff; }
+        .btn-link-amber:hover { background: #b45309; }
+        .btn-link-slate { background: #334155; color: #fff; }
+        .btn-link-slate:hover { background: #475569; }
+
+        .grid-telemetry {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-value {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1;
+        }
+
+        .card-unit {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-left: 4px;
+        }
+
+        .card-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-top: 12px;
+        }
+
+        .pill-ok { background: #ecfdf5; color: #059669; }
+        .pill-warn { background: #fffbeb; color: #d97706; }
+        .pill-danger { background: #fef2f2; color: #dc2626; animation: alert-pulse 1.5s infinite; }
+
+        @keyframes alert-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+
+        .panel-split {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .panel-split { grid-template-columns: 1fr; }
+        }
+
+        .sim-toolbar {
+            background: #ffffff;
+            border: 1px dashed #cbd5e1;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .sim-toolbar h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #334155;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sim-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            border: none;
+            cursor: pointer;
+            padding: 10px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-act-normal { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+        .btn-act-normal:hover { background: #d1fae5; }
+        .btn-act-crisis { background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+        .btn-act-crisis:hover { background: #fee2e2; }
+        .btn-act-brady { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; }
+        .btn-act-brady:hover { background: #fef3c7; }
+
+        .progress-bar-wrap {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 999px;
+            overflow: hidden;
+            margin: 12px 0 16px 0;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: #10b981;
+            border-radius: 999px;
+            transition: width 0.5s ease, background-color 0.5s ease;
+        }
+
+        .protocols-box {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .protocols-box li {
+            font-size: 12.5px;
+            padding: 8px 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        table.history-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        table.history-table th {
+            text-align: left;
+            background: #f1f5f9;
+            padding: 10px 14px;
+            color: #475569;
+            font-weight: 700;
+        }
+
+        table.history-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-title">
+                <h1>
+                    <span>❤️</span> CardioIA - Hub Integrador (Fase 7)
+                    <span class="badge-live"><span class="badge-dot"></span> BACKEND ATIVO</span>
+                </h1>
+                <p>MVP Final: Orquestração em Python conectando IoT MicroPython (ESP32/Wokwi), IAs das Fases 4, 5 e 6, e UI Web/Mobile</p>
+            </div>
+            <div class="nav-links">
+                <a href="https://fiap-project-cardio-ia-delta.vercel.app" target="_blank" class="btn-link btn-link-blue">🌐 Abrir Web (Vercel)</a>
+                <a href="https://wokwi.com/projects/463793755500080129" target="_blank" class="btn-link btn-link-amber">⚡ Simulação Wokwi</a>
+                <a href="/fase6" class="btn-link btn-link-green">🤖 Multiagente Fase 6</a>
+                <a href="/api/status" class="btn-link btn-link-slate">🩺 Health Check API</a>
+            </div>
+        </header>
+
+        <!-- Barra de Simulação Rápida -->
+        <div class="sim-toolbar">
+            <h3>
+                <span>⚡ DISPARADOR DE TELEMETRIA IOT (ESP32 MICROPYTHON)</span>
+                <span id="last-update" style="font-size: 12px; color: #64748b; font-weight: 500;">Aguardando dados...</span>
+            </h3>
+            <div class="sim-buttons">
+                <button class="btn-action btn-act-normal" onclick="simularTelemetria('normal')">🟢 Simular Sinais Estáveis (72 BPM / 36.5°C)</button>
+                <button class="btn-action btn-act-crisis" onclick="simularTelemetria('critico')">🔴 Simular Crise / Taquicardia (142 BPM / 38.6°C)</button>
+                <button class="btn-action btn-act-brady" onclick="simularTelemetria('bradicardia')">🟡 Simular Bradicardia (44 BPM / 36.2°C)</button>
+            </div>
+        </div>
+
+        <!-- Grid de Sinais Vitais -->
+        <div class="grid-telemetry">
+            <div class="card">
+                <div class="card-label"><span>Frequência Cardíaca</span> <span>💓</span></div>
+                <div><span class="card-value" id="val-bpm">--</span><span class="card-unit">BPM</span></div>
+                <div class="card-pill pill-ok" id="pill-bpm">RITMO NORMAL</div>
+            </div>
+
+            <div class="card">
+                <div class="card-label"><span>Temperatura Corporal</span> <span>🌡️</span></div>
+                <div><span class="card-value" id="val-temp">--</span><span class="card-unit">°C</span></div>
+                <div class="card-pill pill-ok" id="pill-temp">AFEBRIL</div>
+            </div>
+
+            <div class="card">
+                <div class="card-label"><span>Umidade Ambiente</span> <span>💧</span></div>
+                <div><span class="card-value" id="val-umid">--</span><span class="card-unit">%</span></div>
+                <div class="card-pill pill-ok" id="pill-umid">SENSOR DHT22 OK</div>
+            </div>
+
+            <div class="card">
+                <div class="card-label"><span>Hardware & Edge</span> <span>⚡</span></div>
+                <div><span class="card-value" style="font-size: 26px;" id="val-edge">ESP32</span></div>
+                <div class="card-pill pill-ok" id="pill-edge">LED ALERTA: APAGADO</div>
+            </div>
+        </div>
+
+        <!-- Painel de Predição de Risco & Protocolos -->
+        <div class="panel-split">
+            <div class="card">
+                <div class="card-label">
+                    <span>PREDIÇÃO DE CRISES - RANDOM FOREST (FASE 6)</span>
+                    <span id="badge-risco-cat" style="font-weight: 800; font-size: 13px; color: #059669;">RISCO: BAIXO</span>
+                </div>
+                <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Probabilidade calculada pelo modelo com 99,90% de acurácia:</p>
+                <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 18px;">
+                    <span>Score Clínico:</span>
+                    <span id="val-prob">5%</span>
+                </div>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar-fill" id="progress-prob" style="width: 5%;"></div>
+                </div>
+
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; margin-top: 12px;">
+                    <strong style="font-size: 12px; color: #1e293b; display: block; margin-bottom: 4px;">Parecer do Sistema Multiagente:</strong>
+                    <p style="font-size: 12px; color: #475569;" id="val-recom">Paciente com sinais estáveis. Monitoramento ambulatorial mantido.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-label">
+                    <span>DIRETRIZES CLÍNICAS ACIONADAS</span>
+                    <span id="count-protocols" style="color: #2563eb;">1 protocolo</span>
+                </div>
+                <ul class="protocols-box" id="list-protocols">
+                    <li>⚡ Protocolo de Observação: Sinais vitais dentro dos limiares de segurança.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tabela de Histórico -->
+        <div class="card" style="margin-bottom: 24px;">
+            <div class="card-label" style="margin-bottom: 14px;">
+                <span>HISTÓRICO RECENTE DE TELEMETRIA</span>
+                <span>Últimas Leituras</span>
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Dispositivo</th>
+                            <th>BPM</th>
+                            <th>Temperatura</th>
+                            <th>Status Borda</th>
+                            <th>IA Risco</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <tr><td colspan="6" style="text-align: center; color: #94a3b8;">Carregando histórico...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer class="footer">
+            FIAP - 2TIAOA | Projeto CardioIA - Fase 7 (MVP Final) | Integrantes: Davi Santos Ferreira & Lais Kurahashi
+        </footer>
+    </div>
+
+    <script>
+        async function atualizarDados() {
+            try {
+                const resAtual = await fetch('/api/telemetria/atual');
+                if (resAtual.ok) {
+                    const dados = await resAtual.json();
+                    renderizarSinais(dados);
+                }
+
+                const resHist = await fetch('/api/telemetria/historico?limite=10');
+                if (resHist.ok) {
+                    const hist = await resHist.json();
+                    renderizarHistorico(hist.leituras || []);
+                }
+            } catch (e) {
+                console.error("Falha ao atualizar telemetria:", e);
+            }
+        }
+
+        function renderizarSinais(dados) {
+            document.getElementById('val-bpm').innerText = dados.bpm ?? 72;
+            document.getElementById('val-temp').innerText = Number(dados.temperatura ?? 36.6).toFixed(1);
+            document.getElementById('val-umid').innerText = Number(dados.umidade ?? 55).toFixed(0);
+            document.getElementById('val-edge').innerText = dados.status_edge ?? 'ESTAVEL';
+            document.getElementById('last-update').innerText = 'Último pacote: ' + (dados.hora || dados.timestamp || 'Agora');
+
+            // Pill BPM
+            const pillBpm = document.getElementById('pill-bpm');
+            if (dados.bpm > 120) {
+                pillBpm.className = 'card-pill pill-danger';
+                pillBpm.innerText = 'TAQUICARDIA';
+            } else if (dados.bpm < 50) {
+                pillBpm.className = 'card-pill pill-warn';
+                pillBpm.innerText = 'BRADICARDIA';
+            } else {
+                pillBpm.className = 'card-pill pill-ok';
+                pillBpm.innerText = 'RITMO NORMAL';
+            }
+
+            // Pill Temp
+            const pillTemp = document.getElementById('pill-temp');
+            if (dados.temperatura > 38.0) {
+                pillTemp.className = 'card-pill pill-danger';
+                pillTemp.innerText = 'FEBRIL / ALERTA';
+            } else {
+                pillTemp.className = 'card-pill pill-ok';
+                pillTemp.innerText = 'AFEBRIL (NORMAL)';
+            }
+
+            // Pill Edge LED
+            const pillEdge = document.getElementById('pill-edge');
+            if (dados.alerta_critico_edge) {
+                pillEdge.className = 'card-pill pill-danger';
+                pillEdge.innerText = 'LED ALERTA: ACESO';
+            } else {
+                pillEdge.className = 'card-pill pill-ok';
+                pillEdge.innerText = 'LED ALERTA: APAGADO';
+            }
+
+            // Predição Risco
+            const pred = dados.predicao_risco || {};
+            const cat = pred.categoria_risco || 'BAIXO';
+            const prob = Math.round((pred.probabilidade ?? 0.05) * 100);
+
+            const badgeCat = document.getElementById('badge-risco-cat');
+            badgeCat.innerText = 'RISCO: ' + cat;
+            badgeCat.style.color = (cat === 'ALTO') ? '#dc2626' : (cat === 'MEDIO' ? '#d97706' : '#059669');
+
+            document.getElementById('val-prob').innerText = prob + '%';
+            const prog = document.getElementById('progress-prob');
+            prog.style.width = Math.max(prob, 5) + '%';
+            prog.style.backgroundColor = (cat === 'ALTO') ? '#ef4444' : (cat === 'MEDIO' ? '#f59e0b' : '#10b981');
+
+            document.getElementById('val-recom').innerText = pred.recomendacao || 'Sinais estáveis.';
+
+            // Protocolos
+            const protos = pred.protocolos_acionados || [];
+            document.getElementById('count-protocols').innerText = protos.length + ' acionado(s)';
+            const list = document.getElementById('list-protocols');
+            list.innerHTML = '';
+            protos.forEach(p => {
+                const li = document.createElement('li');
+                li.innerText = '⚡ ' + p;
+                list.appendChild(li);
+            });
+        }
+
+        function renderizarHistorico(leituras) {
+            const tb = document.getElementById('table-body');
+            if (!leituras.length) {
+                tb.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#94a3b8;">Nenhum dado registrado ainda.</td></tr>';
+                return;
+            }
+            tb.innerHTML = '';
+            leituras.slice().reverse().forEach(row => {
+                const tr = document.createElement('tr');
+                const cat = row.predicao_risco?.categoria_risco || 'BAIXO';
+                const cor = (cat === 'ALTO') ? '#dc2626' : '#059669';
+                tr.innerHTML = `
+                    <td>${row.hora || row.timestamp || '-'}</td>
+                    <td>${row.dispositivo_id || 'ESP32'}</td>
+                    <td><strong>${row.bpm} bpm</strong></td>
+                    <td>${Number(row.temperatura).toFixed(1)} °C</td>
+                    <td><span class="card-pill ${row.status_edge === 'CRITICO' ? 'pill-danger' : 'pill-ok'}" style="padding: 2px 6px; font-size:10px;">${row.status_edge}</span></td>
+                    <td><strong style="color: ${cor};">${cat}</strong></td>
+                `;
+                tb.appendChild(tr);
+            });
+        }
+
+        async function simularTelemetria(tipo) {
+            let payload = {};
+            if (tipo === 'normal') {
+                payload = { bpm: 72, temperatura: 36.5, umidade: 55, status_clinico: 'ESTAVEL', alerta_critico: false };
+            } else if (tipo === 'critico') {
+                payload = { bpm: 142, temperatura: 38.6, umidade: 62, status_clinico: 'CRITICO', alerta_critico: true };
+            } else if (tipo === 'bradicardia') {
+                payload = { bpm: 44, temperatura: 36.2, umidade: 50, status_clinico: 'ATENCAO', alerta_critico: true };
+            }
+            try {
+                await fetch('/api/telemetria', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                atualizarDados();
+            } catch (e) {
+                alert('Erro ao enviar telemetria: ' + e);
+            }
+        }
+
+        // Iniciar polling a cada 2.5 segundos
+        atualizarDados();
+        setInterval(atualizarDados, 2500);
+    </script>
+</body>
+</html>

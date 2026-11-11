@@ -14,30 +14,51 @@ cls
 echo =======================================================
 echo          CARDIOIA - MENU PRINCIPAL
 echo =======================================================
-echo [1] Iniciar Backend Integrador CardioIA (Fase 7 - Flask REST)
+echo [0] Iniciar Solucao Completa (Backend + Hub Web + Simulador IoT)
+echo [1] Iniciar Backend Integrador em Janela Separada (Fase 7)
 echo [2] Executar Testes Automatizados de Integracao (Fase 7)
 echo [3] Executar Simulador IoT MicroPython (Fase 7)
 echo [4] Gerar Relatorio Tecnico em PDF (Fase 7 - 5 Paginas)
-echo [5] Executar Sistema Multiagente no Terminal (Fase 6 - CLI)
-echo [6] Abrir Dashboard Web Interativo da Fase 6 (Navegador)
-echo [7] Executar Testes Automatizados do Multiagente (Fase 6)
-echo [8] Iniciar Chatbot Conversacional (Fase 5 - Flask ^& Web)
-echo [9] Iniciar Prototipo de Diagnostico ECG (Fase 4 - Streamlit)
-echo [10] Sair
+echo [5] Abrir Hub Web da Solucao no Navegador (http://localhost:5000)
+echo [6] Executar Sistema Multiagente no Terminal (Fase 6 - CLI)
+echo [7] Abrir Dashboard Web Interativo da Fase 6 (Navegador)
+echo [8] Executar Testes Automatizados do Multiagente (Fase 6)
+echo [9] Iniciar Chatbot Conversacional (Fase 5 - Flask ^& Web)
+echo [10] Iniciar Prototipo de Diagnostico ECG (Fase 4 - Streamlit)
+echo [11] Sair
 echo =======================================================
-set /p OPT="Escolha uma opcao (1-10): "
+set /p OPT="Escolha uma opcao (0-11): "
 
+if "%OPT%"=="0" goto AUTO_COMPLETO
 if "%OPT%"=="1" goto BACKEND_FASE7
 if "%OPT%"=="2" goto TESTES_FASE7
 if "%OPT%"=="3" goto SIMULADOR_IOT
 if "%OPT%"=="4" goto RELATORIO_PDF_FASE7
-if "%OPT%"=="5" goto MULTIAGENTE
-if "%OPT%"=="6" goto DASHBOARD_FASE6
-if "%OPT%"=="7" goto TESTES_FASE6
-if "%OPT%"=="8" goto CHATBOT
-if "%OPT%"=="9" goto STREAMLIT
-if "%OPT%"=="10" goto FIM
+if "%OPT%"=="5" goto ABRIR_HUB_WEB
+if "%OPT%"=="6" goto MULTIAGENTE
+if "%OPT%"=="7" goto DASHBOARD_FASE6
+if "%OPT%"=="8" goto TESTES_FASE6
+if "%OPT%"=="9" goto CHATBOT
+if "%OPT%"=="10" goto STREAMLIT
+if "%OPT%"=="11" goto FIM
 echo Opcao invalida! Tente novamente.
+pause
+cls
+goto MENU
+
+:AUTO_COMPLETO
+cls
+echo =======================================================
+echo Inicializando Ecossistema CardioIA Completo (Fase 7)...
+echo =======================================================
+echo 1. Iniciando Backend Integrador em janela dedicada...
+start "CardioIA - Backend Integrador (Fase 7)" cmd /k "chcp 65001 > nul && python backend/app.py"
+timeout /t 3 > nul
+echo 2. Abrindo Hub Web da Solucao no Navegador...
+start http://localhost:5000
+echo 3. Disparando Simulador IoT de Sinais Vitais...
+echo =======================================================
+python iot/simulador_iot.py --qtd 10 --intervalo 2
 pause
 cls
 goto MENU
@@ -45,14 +66,25 @@ goto MENU
 :BACKEND_FASE7
 cls
 echo =======================================================
-echo Iniciando Backend Integrador CardioIA (Fase 7)...
-echo Acesso: http://localhost:5000
-echo Telemetria: http://localhost:5000/api/telemetria/atual
+echo Iniciando Backend Integrador CardioIA em janela dedicada...
+echo Acesso Web: http://localhost:5000
+echo API Status: http://localhost:5000/api/status
 echo =======================================================
-start http://localhost:5000/api/status
-python backend/app.py
+start "CardioIA - Backend Integrador (Fase 7)" cmd /k "chcp 65001 > nul && python backend/app.py"
+timeout /t 2 > nul
+start http://localhost:5000
+echo.
+echo Backend iniciado com sucesso na porta 5000!
+echo O servidor continuara rodando na janela aberta em segundo plano.
+echo.
 pause
 cls
+goto MENU
+
+:ABRIR_HUB_WEB
+cls
+echo Abrindo Hub Web Integrador do CardioIA no navegador...
+start http://localhost:5000
 goto MENU
 
 :TESTES_FASE7

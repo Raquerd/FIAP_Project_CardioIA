@@ -56,8 +56,12 @@ CORS(app, resources={r"/api/*": {"origins": "*"}})
 # ROTAS DE HEALTH CHECK & STATUS INTEGRADO
 # ==============================================================================
 @app.route('/')
+@app.route('/fase7')
 def index():
-    """Retorna página inicial ou status JSON da plataforma integrada."""
+    """Retorna o Hub Integrador da Fase 7 ou o template padrão."""
+    fase7_html = TEMPLATES_DIR / 'fase7_hub.html'
+    if fase7_html.exists():
+        return render_template('fase7_hub.html')
     index_html = TEMPLATES_DIR / 'index.html'
     if index_html.exists():
         return render_template('index.html')
